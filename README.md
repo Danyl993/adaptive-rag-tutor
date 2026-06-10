@@ -1,5 +1,4 @@
-# Adaptive RAG Study System
-
+# Adaptive RAG Tutor
 A persistent LLM-RAG academic study tutor that organizes study material by subject and unit, stores learning history, provides tutor-style explanations, and supports revision and exam preparation.
 
 ## Current Features
