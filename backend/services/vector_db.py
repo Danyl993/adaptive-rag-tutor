@@ -17,3 +17,13 @@ def add_chunks(chunks):
             documents=[chunk],
             ids=[str(i)]
         )
+
+
+def search(query):
+
+    results = collection.query(
+        query_texts=[query],
+        n_results=5
+    )
+
+    return results
