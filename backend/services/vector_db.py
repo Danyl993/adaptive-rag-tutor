@@ -41,4 +41,7 @@ def search(query):
         n_results=5
     )
 
-    return results
+    return {
+        "documents": results["documents"],
+        "metadata": results["metadatas"]
+    }
