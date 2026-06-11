@@ -67,3 +67,22 @@ def search_by_subject_unit(
         "documents": results["documents"],
         "metadata": results["metadatas"]
     }
+
+def get_topic_context(
+    query,
+    subject,
+    unit
+):
+
+    results = search_by_subject_unit(
+        query,
+        subject,
+        unit
+    )
+
+    return {
+        "context": "\n".join(
+            results["documents"][0]
+        ),
+        "sources": results["metadata"][0]
+    }
