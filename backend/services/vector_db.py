@@ -9,15 +9,30 @@ collection = client.get_or_create_collection(
 )
 
 
-def add_chunks(chunks):
+def add_chunks(
+    chunks,
+    subject,
+    unit,
+    file_name,
+    page
+):
 
     for i, chunk in enumerate(chunks):
 
         collection.add(
             documents=[chunk],
-            ids=[str(i)]
-        )
 
+            ids=[
+                f"{subject}_{unit}_{page}_{i}"
+            ],
+
+            metadatas=[{
+                "subject": subject,
+                "unit": unit,
+                "file": file_name,
+                "page": page
+            }]
+        )
 
 def search(query):
 
