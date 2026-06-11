@@ -45,3 +45,25 @@ def search(query):
         "documents": results["documents"],
         "metadata": results["metadatas"]
     }
+def search_by_subject_unit(
+    query,
+    subject,
+    unit
+):
+
+    results = collection.query(
+        query_texts=[query],
+        n_results=5,
+
+        where={
+            "$and": [
+                {"subject": subject},
+                {"unit": unit}
+            ]
+        }
+    )
+
+    return {
+        "documents": results["documents"],
+        "metadata": results["metadatas"]
+    }
