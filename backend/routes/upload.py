@@ -1,11 +1,17 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, UploadFile, File
+
+from services.rag import extract_pdf_text
+from services.chunker import chunk_text
 
 router = APIRouter()
 
 
 @router.post("/upload")
-def upload_pdf():
+async def upload_pdf(
+    file: UploadFile = File(...)
+):
 
     return {
-        "status": "upload route created"
+        "filename": file.filename,
+        "status": "ready for indexing"
     }
