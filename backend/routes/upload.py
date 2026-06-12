@@ -11,7 +11,22 @@ async def upload_pdf(
     file: UploadFile = File(...)
 ):
 
+    pages = extract_pdf_text(
+        file.file
+    )
+
+    total_chunks = 0
+
+    for page_data in pages:
+
+        chunks = chunk_text(
+            page_data["text"]
+        )
+
+        total_chunks += len(chunks)
+
     return {
         "filename": file.filename,
-        "status": "ready for indexing"
+        "pages": len(pages),
+        "chunks": total_chunks
     }
