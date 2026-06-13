@@ -23,3 +23,16 @@ def get_units(subject: str):
         return []
 
     return os.listdir(path)
+
+@router.get("/subjects/{subject}/{unit}/files")
+def get_files(
+    subject: str,
+    unit: str
+):
+
+    path = f"backend/data/uploads/{subject}/{unit}"
+
+    if not os.path.exists(path):
+        return []
+
+    return os.listdir(path)
