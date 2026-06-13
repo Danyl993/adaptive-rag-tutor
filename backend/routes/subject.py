@@ -13,3 +13,13 @@ def get_subjects():
         return []
 
     return os.listdir(base)
+
+@router.get("/subjects/{subject}/units")
+def get_units(subject: str):
+
+    path = f"backend/data/uploads/{subject}"
+
+    if not os.path.exists(path):
+        return []
+
+    return os.listdir(path)
