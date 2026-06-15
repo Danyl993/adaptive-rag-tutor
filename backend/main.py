@@ -9,6 +9,7 @@ from routes.revision import router as revision_router
 from routes.topics import router as topics_router
 from routes.cleanup import router as cleanup_router
 from routes.stats import router as stats_router
+from routes.search import router as search_router
 
 app = FastAPI()
 
@@ -31,3 +32,4 @@ app.include_router(revision_router)
 app.include_router(topics_router)
 app.include_router(cleanup_router)
 app.include_router(stats_router)
+app.include_router(search_router)
