@@ -11,6 +11,16 @@ from routes.cleanup import router as cleanup_router
 
 app = FastAPI()
 
+
+@app.get("/")
+def root():
+
+    return {
+        "project": "Adaptive RAG Tutor",
+        "status": "running"
+    }
+
+
 app.include_router(upload_router)
 app.include_router(history_router)
 app.include_router(subjects_router)
