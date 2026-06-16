@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from services.history import get_history
 from routes.upload import router as upload_router
 from routes.history import router as history_router
 from routes.subjects import router as subjects_router
