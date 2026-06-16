@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from routes.upload import router as upload_router
 from routes.history import router as history_router
-from routes.subjects import router as subjects_router
+from routes.subject import router as subjects_router
 from routes.learn import router as learn_router
 from routes.exam import router as exam_router
 from routes.revision import router as revision_router
@@ -10,6 +10,7 @@ from routes.cleanup import router as cleanup_router
 from routes.stats import router as stats_router
 from routes.search import router as search_router
 from routes.files import router as files_router
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
@@ -22,6 +23,13 @@ def root():
         "status": "running"
     }
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(upload_router)
 app.include_router(history_router)
