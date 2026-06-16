@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-from services.vector_db import get_topic_context
 
 from services.vector_db import (
     get_topic_context,
