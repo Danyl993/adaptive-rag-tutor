@@ -1,6 +1,8 @@
+import PageLayout from "@/components/PageLayout";
+
 export default function DashboardPage() {
   return (
-    <main className="p-6 text-white">
+    <PageLayout>
       <h1 className="text-3xl font-bold">
         Dashboard
       </h1>
@@ -8,6 +10,6 @@ export default function DashboardPage() {
       <p className="mt-4">
         Adaptive RAG Tutor Dashboard
       </p>
-    </main>
+    </PageLayout>
   );
 }
