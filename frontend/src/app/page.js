@@ -30,8 +30,8 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="grid grid-cols-12 h-[90vh]">
-        <div className="col-span-2 border-r border-gray-800 p-4">
+      <div className="grid grid-cols-1 md:grid-cols-12 h-[90vh]">
+        <div className="md:col-span-2 border-r border-gray-800 p-4">
           <NavigationSidebar />
         </div>
 
@@ -39,7 +39,7 @@ export default function Home() {
           Chat Area
         </div>
 
-        <div className="col-span-2 border-l border-gray-800 p-4">
+        <div className="md:col-span-2 border-l border-gray-800 p-4">
           Sources
         </div>
       </div>
