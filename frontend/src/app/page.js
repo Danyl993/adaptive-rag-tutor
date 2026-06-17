@@ -2,6 +2,7 @@
 
 import API from "@/services/api";
 import NavigationSidebar from "@/components/NavigationSidebar";
+import ModeSelector from "@/components/ModeSelector";
 
 export default function Home() {
   async function testBackend() {
@@ -15,6 +16,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-950 text-white">
+      <div className="p-4 border-b border-gray-800">
+        <ModeSelector />
+      </div>
       <div className="border-b border-gray-800 p-4">
         <h1 className="text-3xl font-bold">
           Adaptive RAG Tutor
@@ -35,7 +39,7 @@ export default function Home() {
           <NavigationSidebar />
         </div>
 
-        <div className="col-span-8 p-4">
+        <div className="md:col-span-8 p-4">
           Chat Area
         </div>
 
