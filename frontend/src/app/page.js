@@ -1,6 +1,7 @@
 "use client";
 
 import API from "@/services/api";
+import NavigationSidebar from "@/components/NavigationSidebar";
 
 export default function Home() {
   async function testBackend() {
@@ -31,7 +32,7 @@ export default function Home() {
 
       <div className="grid grid-cols-12 h-[90vh]">
         <div className="col-span-2 border-r border-gray-800 p-4">
-          Topics
+          <NavigationSidebar />
         </div>
 
         <div className="col-span-8 p-4">
