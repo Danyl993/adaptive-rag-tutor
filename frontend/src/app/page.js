@@ -4,6 +4,7 @@ import API from "@/services/api";
 import NavigationSidebar from "@/components/NavigationSidebar";
 import ModeSelector from "@/components/ModeSelector";
 import SubjectSelector from "@/components/SubjectSelector";
+import UnitSelector from "@/components/UnitSelector";
 
 export default function Home() {
   async function testBackend() {
@@ -20,8 +21,9 @@ export default function Home() {
       <div className="p-4 border-b border-gray-800">
         <ModeSelector />
       </div>
-      <div className="p-4 border-b border-gray-800">
+      <div className="p-4 border-b border-gray-800 flex gap-4">
         <SubjectSelector />
+        <UnitSelector />
       </div>
       <div className="border-b border-gray-800 p-4">
         <h1 className="text-3xl font-bold">
