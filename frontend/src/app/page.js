@@ -5,6 +5,7 @@ import NavigationSidebar from "@/components/NavigationSidebar";
 import ModeSelector from "@/components/ModeSelector";
 import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
+import ChatPanel from "@/components/ChatPanel";
 
 export default function Home() {
   async function testBackend() {
@@ -46,7 +47,7 @@ export default function Home() {
         </div>
 
         <div className="md:col-span-8 p-4">
-          Chat Area
+          <ChatPanel />
         </div>
 
         <div className="md:col-span-2 border-l border-gray-800 p-4">
