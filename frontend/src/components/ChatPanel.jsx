@@ -10,6 +10,16 @@ export default function ChatPanel() {
 
       <Message text="Welcome to Adaptive RAG Tutor." />
 
+      <div className="mt-4 p-3 bg-gray-900 rounded">
+        <h3 className="font-bold mb-2">
+          Retrieved Context
+        </h3>
+
+        <p>
+          Relevant study material will appear here.
+        </p>
+      </div>
+
       <ChatInput />
     </div>
   );
