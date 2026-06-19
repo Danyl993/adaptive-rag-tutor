@@ -1,4 +1,5 @@
 import Message from "./Message";
+import ChatInput from "./ChatInput";
 
 export default function ChatPanel() {
   return (
@@ -8,6 +9,8 @@ export default function ChatPanel() {
       </h2>
 
       <Message text="Welcome to Adaptive RAG Tutor." />
+
+      <ChatInput />
     </div>
   );
 }
