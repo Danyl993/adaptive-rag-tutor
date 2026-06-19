@@ -1,3 +1,5 @@
+import Message from "./Message";
+
 export default function ChatPanel() {
   return (
     <div className="border border-gray-800 rounded p-4 h-full">
@@ -5,9 +7,7 @@ export default function ChatPanel() {
         Chat
       </h2>
 
-      <div>
-        Ask questions about your study material.
-      </div>
+      <Message text="Welcome to Adaptive RAG Tutor." />
     </div>
   );
 }
