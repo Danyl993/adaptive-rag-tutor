@@ -1,3 +1,5 @@
+"use client";
+
 export default function TopicsSidebar() {
   const topics = [
     "Processes",
@@ -5,6 +7,10 @@ export default function TopicsSidebar() {
     "Deadlocks",
     "Scheduling",
   ];
+
+  function handleTopicClick(topic) {
+    alert(`Selected Topic: ${topic}`);
+  }
 
   return (
     <div className="border border-gray-800 rounded p-4">
@@ -16,6 +22,7 @@ export default function TopicsSidebar() {
         {topics.map((topic) => (
           <button
             key={topic}
+            onClick={() => handleTopicClick(topic)}
             className="text-left bg-gray-800 p-2 rounded"
           >
             {topic}
