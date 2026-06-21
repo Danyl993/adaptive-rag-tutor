@@ -27,6 +27,14 @@ Answer according to the explanation style.
 
 Only use information from the provided context.
 Mention source references when possible.
+
+At the end add:
+Source: <source reference>
 """
 
-    return generate_response(prompt)
+    answer = generate_response(prompt)
+
+    return {
+        "answer": answer,
+        "source": sources
+    }
