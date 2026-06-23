@@ -1,4 +1,4 @@
-from services.study_planner import generate_study_plan
+from services.study_planner import generate_daily_schedule, generate_study_plan
 
 print(
     generate_study_plan(
@@ -6,5 +6,14 @@ print(
             "Deadlocks",
             "Memory Management"
         ]
+    )
+)
+print(
+    generate_daily_schedule(
+        [
+            "Deadlocks",
+            "Memory Management"
+        ],
+        3
     )
 )
