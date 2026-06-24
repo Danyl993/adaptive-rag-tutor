@@ -97,3 +97,15 @@ def citation_accuracy(
         correct / len(actual_sources),
         2
     )
+def hallucination_rate(
+    unsupported_claims,
+    total_claims
+):
+
+    if total_claims == 0:
+        return 0.0
+
+    return round(
+        unsupported_claims / total_claims,
+        2
+    )

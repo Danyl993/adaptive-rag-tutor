@@ -1,27 +1,11 @@
-from services.evaluation import evaluate_answer
-from services.evaluation import (
-    evaluate_answer,
-    recall_at_k
-)
-from services.evaluation import (
-    evaluate_answer,
-    recall_at_k,
-    precision_at_k
-)
-from services.evaluation import (
-    evaluate_answer,
-    recall_at_k,
-    precision_at_k,
-    mean_reciprocal_rank
-)
 from services.evaluation import (
     evaluate_answer,
     recall_at_k,
     precision_at_k,
     mean_reciprocal_rank,
-    citation_accuracy
+    citation_accuracy,
+    hallucination_rate
 )
-
 print(
     evaluate_answer(
         "Operating systems manage hardware",
@@ -50,5 +34,11 @@ print(
     citation_accuracy(
         ["Page 5", "Page 8"],
         ["Page 5", "Page 8"]
+    )
+)
+print(
+    hallucination_rate(
+        2,
+        10
     )
 )
