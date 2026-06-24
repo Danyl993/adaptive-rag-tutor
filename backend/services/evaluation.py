@@ -79,3 +79,21 @@ def mean_reciprocal_rank(
             )
 
     return 0.0
+def citation_accuracy(
+    cited_sources,
+    actual_sources
+):
+
+    if len(actual_sources) == 0:
+        return 0.0
+
+    correct = len(
+        set(cited_sources)
+        &
+        set(actual_sources)
+    )
+
+    return round(
+        correct / len(actual_sources),
+        2
+    )

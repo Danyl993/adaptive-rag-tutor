@@ -14,6 +14,13 @@ from services.evaluation import (
     precision_at_k,
     mean_reciprocal_rank
 )
+from services.evaluation import (
+    evaluate_answer,
+    recall_at_k,
+    precision_at_k,
+    mean_reciprocal_rank,
+    citation_accuracy
+)
 
 print(
     evaluate_answer(
@@ -37,5 +44,11 @@ print(
     mean_reciprocal_rank(
         "doc2",
         ["doc1", "doc2", "doc3"]
+    )
+)
+print(
+    citation_accuracy(
+        ["Page 5", "Page 8"],
+        ["Page 5", "Page 8"]
     )
 )
