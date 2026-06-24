@@ -62,3 +62,20 @@ def precision_at_k(
         found / len(retrieved_docs),
         2
     )
+def mean_reciprocal_rank(
+    relevant_doc,
+    retrieved_docs
+):
+
+    for i, doc in enumerate(
+        retrieved_docs,
+        start=1
+    ):
+
+        if doc == relevant_doc:
+            return round(
+                1 / i,
+                2
+            )
+
+    return 0.0
