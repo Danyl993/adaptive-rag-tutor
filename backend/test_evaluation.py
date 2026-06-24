@@ -3,6 +3,11 @@ from services.evaluation import (
     evaluate_answer,
     recall_at_k
 )
+from services.evaluation import (
+    evaluate_answer,
+    recall_at_k,
+    precision_at_k
+)
 
 print(
     evaluate_answer(
@@ -12,6 +17,12 @@ print(
 )
 print(
     recall_at_k(
+        ["doc1", "doc2"],
+        ["doc1", "doc3", "doc2"]
+    )
+)
+print(
+    precision_at_k(
         ["doc1", "doc2"],
         ["doc1", "doc3", "doc2"]
     )

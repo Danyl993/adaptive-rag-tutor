@@ -44,3 +44,21 @@ def recall_at_k(
         found / len(relevant_docs),
         2
     )
+def precision_at_k(
+    relevant_docs,
+    retrieved_docs
+):
+
+    if len(retrieved_docs) == 0:
+        return 0.0
+
+    found = len(
+        set(relevant_docs)
+        &
+        set(retrieved_docs)
+    )
+
+    return round(
+        found / len(retrieved_docs),
+        2
+    )
