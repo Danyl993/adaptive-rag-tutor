@@ -109,3 +109,15 @@ def hallucination_rate(
         unsupported_claims / total_claims,
         2
     )
+def answer_accuracy(
+    correct_answers,
+    total_answers
+):
+
+    if total_answers == 0:
+        return 0.0
+
+    return round(
+        correct_answers / total_answers,
+        2
+    )

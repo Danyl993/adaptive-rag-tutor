@@ -4,7 +4,8 @@ from services.evaluation import (
     precision_at_k,
     mean_reciprocal_rank,
     citation_accuracy,
-    hallucination_rate
+    hallucination_rate,
+    answer_accuracy
 )
 print(
     evaluate_answer(
@@ -39,6 +40,12 @@ print(
 print(
     hallucination_rate(
         2,
+        10
+    )
+)
+print(
+    answer_accuracy(
+        8,
         10
     )
 )
