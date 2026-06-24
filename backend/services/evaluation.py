@@ -26,3 +26,21 @@ def evaluate_answer(
         overlap / total,
         2
     )
+def recall_at_k(
+    relevant_docs,
+    retrieved_docs
+):
+
+    if len(relevant_docs) == 0:
+        return 0.0
+
+    found = len(
+        set(relevant_docs)
+        &
+        set(retrieved_docs)
+    )
+
+    return round(
+        found / len(relevant_docs),
+        2
+    )
