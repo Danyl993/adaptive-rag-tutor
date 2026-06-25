@@ -44,3 +44,27 @@ def parse_document(file_path):
     raise ValueError(
         f"Unsupported file type: {file_type}"
     )
+def parse_document(file_path):
+
+    try:
+
+        validate_document(file_path)
+
+        file_type = detect_document_type(file_path)
+
+        if file_type == ".pptx":
+            return extract_text_from_pptx(file_path)
+
+        if file_type in [".png", ".jpg", ".jpeg"]:
+            return extract_text_from_image(file_path)
+
+        raise ValueError(
+            f"Unsupported file type: {file_type}"
+        )
+
+    except Exception as e:
+
+        return {
+            "success": False,
+            "error": str(e)
+        }
