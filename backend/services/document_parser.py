@@ -1,3 +1,6 @@
+import os
+
+
 from pathlib import Path
 
 from services.ocr import extract_text_from_image
@@ -28,22 +31,6 @@ def validate_document(file_path):
 
     return True
 
-
-def parse_document(file_path):
-
-    validate_document(file_path)
-
-    file_type = detect_document_type(file_path)
-
-    if file_type == ".pptx":
-        return extract_text_from_pptx(file_path)
-
-    if file_type in [".png", ".jpg", ".jpeg"]:
-        return extract_text_from_image(file_path)
-
-    raise ValueError(
-        f"Unsupported file type: {file_type}"
-    )
 def parse_document(file_path):
 
     try:
@@ -68,3 +55,11 @@ def parse_document(file_path):
             "success": False,
             "error": str(e)
         }
+
+def extract_metadata(file_path):
+
+    return {
+        "file_name": os.path.basename(file_path),
+        "extension": detect_document_type(file_path),
+        "size_bytes": os.path.getsize(file_path)
+    }
