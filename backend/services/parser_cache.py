@@ -53,3 +53,10 @@ def cache_efficiency():
         _cache_hits / total,
         2
     )
+
+def cache_size():
+
+    return {
+        "documents": len(_cache),
+        "entries": list(_cache.keys())
+    }
