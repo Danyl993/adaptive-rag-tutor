@@ -34,3 +34,10 @@ def cache_metrics():
         "hits": _cache_hits,
         "misses": _cache_misses
     }
+def reset_cache_metrics():
+
+    global _cache_hits
+    global _cache_misses
+
+    _cache_hits = 0
+    _cache_misses = 0
