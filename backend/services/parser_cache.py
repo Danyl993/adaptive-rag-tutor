@@ -41,3 +41,15 @@ def reset_cache_metrics():
 
     _cache_hits = 0
     _cache_misses = 0
+
+def cache_efficiency():
+
+    total = _cache_hits + _cache_misses
+
+    if total == 0:
+        return 0.0
+
+    return round(
+        _cache_hits / total,
+        2
+    )
