@@ -5,7 +5,10 @@ from pathlib import Path
 
 from services.ocr import extract_text_from_image
 from services.pptx_parser import extract_text_from_pptx
-
+from services.parser_cache import (
+    cache_document,
+    get_cached_document
+)
 
 SUPPORTED_TYPES = {
     ".pptx",
@@ -33,6 +36,11 @@ def validate_document(file_path):
 
 def parse_document(file_path):
 
+    cached = get_cached_document(file_path)
+
+    if cached is not None:
+        return cached
+
     try:
 
         validate_document(file_path)
@@ -40,14 +48,22 @@ def parse_document(file_path):
         file_type = detect_document_type(file_path)
 
         if file_type == ".pptx":
-            return extract_text_from_pptx(file_path)
+            result = extract_text_from_pptx(file_path)
 
-        if file_type in [".png", ".jpg", ".jpeg"]:
-            return extract_text_from_image(file_path)
+        elif file_type in [".png", ".jpg", ".jpeg"]:
+            result = extract_text_from_image(file_path)
 
-        raise ValueError(
-            f"Unsupported file type: {file_type}"
+        else:
+            raise ValueError(
+                f"Unsupported file type: {file_type}"
+            )
+
+        cache_document(
+            file_path,
+            result
         )
+
+        return result
 
     except Exception as e:
 
@@ -55,7 +71,6 @@ def parse_document(file_path):
             "success": False,
             "error": str(e)
         }
-
 def extract_metadata(file_path):
 
     return {
