@@ -76,3 +76,15 @@ def export_cache(file_path):
             file,
             indent=4
         )
+    
+def import_cache(file_path):
+
+    global _cache
+
+    with open(
+        file_path,
+        "r",
+        encoding="utf-8"
+    ) as file:
+
+        _cache = json.load(file)
