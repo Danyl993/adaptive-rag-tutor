@@ -1,0 +1,17 @@
+from services.parser_cache import (
+    cache_document,
+    get_cached_document,
+    cache_metrics
+)
+
+cache_document(
+    "sample.pptx",
+    "Operating Systems"
+)
+
+get_cached_document("sample.pptx")
+get_cached_document("invalid.pptx")
+
+print(
+    cache_metrics()
+)
