@@ -1,12 +1,12 @@
 from services.parser_cache import (
     cache_document,
     get_cached_document,
-    clear_cache
+    remove_cached_document
 )
 
 cache_document(
     "sample.pptx",
-    "Operating Systems\nMemory Management"
+    "Operating Systems"
 )
 
 print(
@@ -15,7 +15,9 @@ print(
     )
 )
 
-clear_cache()
+remove_cached_document(
+    "sample.pptx"
+)
 
 print(
     get_cached_document(

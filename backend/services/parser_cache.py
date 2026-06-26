@@ -19,3 +19,10 @@ def get_cached_document(
 def clear_cache():
 
     _cache.clear()
+
+def remove_cached_document(
+    file_path
+):
+
+    if file_path in _cache:
+        del _cache[file_path]
