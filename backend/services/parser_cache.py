@@ -1,3 +1,5 @@
+import json
+
 _cache = {}
 
 _cache_hits = 0
@@ -60,3 +62,17 @@ def cache_size():
         "documents": len(_cache),
         "entries": list(_cache.keys())
     }
+
+def export_cache(file_path):
+
+    with open(
+        file_path,
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            _cache,
+            file,
+            indent=4
+        )
