@@ -9,6 +9,9 @@ from services.parser_cache import (
     cache_document,
     get_cached_document
 )
+from services.parser_session import (
+    record_document
+)
 
 SUPPORTED_TYPES = {
     ".pptx",
@@ -62,6 +65,8 @@ def parse_document(file_path):
             file_path,
             result
         )
+
+        record_document()
 
         return result
 
