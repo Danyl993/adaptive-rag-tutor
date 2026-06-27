@@ -45,3 +45,9 @@ def get_session():
         "documents_parsed": _session["documents_parsed"],
         "duration_seconds": duration
     }
+
+def reset_session():
+
+    _session["started_at"] = None
+    _session["ended_at"] = None
+    _session["documents_parsed"] = 0
