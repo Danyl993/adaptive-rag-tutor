@@ -1,15 +1,19 @@
+import time
+
 from services.parser_session import (
     start_session,
+    record_document,
+    end_session,
     get_session
 )
 
-from services.document_parser import parse_document
-
 start_session()
 
-parse_document(
-    "sample.pptx"
-)
+record_document()
+
+time.sleep(2)
+
+end_session()
 
 print(
     get_session()
