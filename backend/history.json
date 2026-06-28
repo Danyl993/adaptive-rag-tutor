@@ -1,10 +1,10 @@
 [
     {
-        "documents_parsed": 2,
-        "duration_seconds": 5
+        "documents_parsed": 3,
+        "duration_seconds": 7
     },
     {
-        "documents_parsed": 4,
-        "duration_seconds": 8
+        "documents_parsed": 5,
+        "duration_seconds": 12
     }
 ]

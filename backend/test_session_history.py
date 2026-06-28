@@ -1,35 +1,40 @@
 from services.session_history import (
     add_session,
-    clear_history
+    clear_history,
+    get_history
 )
 
-from services.session_history_storage import (
-    save_history,
-    load_history
+from services.session_history_manager import (
+    export_history,
+    import_history
 )
 
 clear_history()
 
 add_session(
     {
-        "documents_parsed": 2,
-        "duration_seconds": 5
+        "documents_parsed": 3,
+        "duration_seconds": 7
     }
 )
 
 add_session(
     {
-        "documents_parsed": 4,
-        "duration_seconds": 8
+        "documents_parsed": 5,
+        "duration_seconds": 12
     }
 )
 
-save_history(
-    "history.json"
-)
+export_history()
+
+clear_history()
 
 print(
-    load_history(
-        "history.json"
-    )
+    get_history()
+)
+
+import_history()
+
+print(
+    get_history()
 )
