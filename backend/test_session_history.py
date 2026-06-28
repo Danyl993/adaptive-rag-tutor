@@ -1,10 +1,8 @@
 from services.session_history import (
     add_session,
+    delete_session,
+    get_history,
     clear_history
-)
-
-from services.session_history_search import (
-    search_sessions
 )
 
 clear_history()
@@ -23,15 +21,14 @@ add_session(
     }
 )
 
-add_session(
-    {
-        "documents_parsed": 2,
-        "duration_seconds": 10
-    }
+print(
+    get_history()
+)
+
+delete_session(
+    0
 )
 
 print(
-    search_sessions(
-        2
-    )
+    get_history()
 )

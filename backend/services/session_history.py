@@ -14,3 +14,8 @@ def get_history():
 def clear_history():
 
     _history.clear()
+
+def delete_session(index):
+
+    if 0 <= index < len(_history):
+        _history.pop(index)
