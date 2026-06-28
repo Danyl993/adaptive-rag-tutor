@@ -3,8 +3,8 @@ from services.session_history import (
     clear_history
 )
 
-from services.session_history_filter import (
-    filter_sessions
+from services.session_history_sort import (
+    sort_sessions
 )
 
 clear_history()
@@ -18,20 +18,18 @@ add_session(
 
 add_session(
     {
-        "documents_parsed": 5,
-        "duration_seconds": 8
+        "documents_parsed": 7,
+        "duration_seconds": 12
     }
 )
 
 add_session(
     {
-        "documents_parsed": 1,
-        "duration_seconds": 2
+        "documents_parsed": 4,
+        "duration_seconds": 8
     }
 )
 
 print(
-    filter_sessions(
-        minimum_documents=2
-    )
+    sort_sessions()
 )
