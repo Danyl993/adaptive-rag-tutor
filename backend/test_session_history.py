@@ -1,7 +1,10 @@
 from services.session_history import (
     add_session,
-    get_history,
     clear_history
+)
+
+from services.session_history_analytics import (
+    session_history_analytics
 )
 
 clear_history()
@@ -16,10 +19,10 @@ add_session(
 add_session(
     {
         "documents_parsed": 4,
-        "duration_seconds": 10
+        "duration_seconds": 9
     }
 )
 
 print(
-    get_history()
+    session_history_analytics()
 )
