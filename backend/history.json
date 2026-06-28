@@ -1,0 +1,10 @@
+[
+    {
+        "documents_parsed": 2,
+        "duration_seconds": 5
+    },
+    {
+        "documents_parsed": 4,
+        "duration_seconds": 8
+    }
+]

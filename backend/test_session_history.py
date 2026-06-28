@@ -1,8 +1,11 @@
 from services.session_history import (
     add_session,
-    delete_session,
-    get_history,
     clear_history
+)
+
+from services.session_history_storage import (
+    save_history,
+    load_history
 )
 
 clear_history()
@@ -21,14 +24,12 @@ add_session(
     }
 )
 
-print(
-    get_history()
-)
-
-delete_session(
-    0
+save_history(
+    "history.json"
 )
 
 print(
-    get_history()
+    load_history(
+        "history.json"
+    )
 )
