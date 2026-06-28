@@ -3,8 +3,8 @@ from services.session_history import (
     clear_history
 )
 
-from services.session_history_report import (
-    generate_history_report
+from services.session_history_duplicates import (
+    find_duplicate_sessions
 )
 
 clear_history()
@@ -23,6 +23,13 @@ add_session(
     }
 )
 
+add_session(
+    {
+        "documents_parsed": 3,
+        "duration_seconds": 6
+    }
+)
+
 print(
-    generate_history_report()
+    find_duplicate_sessions()
 )
