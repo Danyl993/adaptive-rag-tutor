@@ -3,8 +3,8 @@ from services.session_history import (
     clear_history
 )
 
-from services.session_history_duplicates import (
-    find_duplicate_sessions
+from services.session_history_merge import (
+    merge_histories
 )
 
 clear_history()
@@ -16,20 +16,19 @@ add_session(
     }
 )
 
-add_session(
+other_history = [
     {
         "documents_parsed": 5,
         "duration_seconds": 10
-    }
-)
-
-add_session(
+    },
     {
         "documents_parsed": 3,
         "duration_seconds": 6
     }
-)
+]
 
 print(
-    find_duplicate_sessions()
+    merge_histories(
+        other_history
+    )
 )
