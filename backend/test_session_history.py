@@ -3,8 +3,8 @@ from services.session_history import (
     clear_history
 )
 
-from services.session_history_analytics import (
-    session_history_analytics
+from services.session_history_filter import (
+    filter_sessions
 )
 
 clear_history()
@@ -18,11 +18,20 @@ add_session(
 
 add_session(
     {
-        "documents_parsed": 4,
-        "duration_seconds": 9
+        "documents_parsed": 5,
+        "duration_seconds": 8
+    }
+)
+
+add_session(
+    {
+        "documents_parsed": 1,
+        "duration_seconds": 2
     }
 )
 
 print(
-    session_history_analytics()
+    filter_sessions(
+        minimum_documents=2
+    )
 )
