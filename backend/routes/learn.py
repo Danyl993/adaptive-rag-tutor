@@ -1,12 +1,13 @@
 from fastapi import APIRouter
+from typing import Optional
 
 router = APIRouter()
 
 
 @router.get("/learn")
 def learn(
-    subject: str,
-    unit: int
+    subject: Optional[str] = None,
+    unit: Optional[int] = None
 ):
 
     return {
