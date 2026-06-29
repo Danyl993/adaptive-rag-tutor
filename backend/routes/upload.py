@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File, Form
 import tempfile
 import shutil
 
@@ -12,6 +12,8 @@ router = APIRouter()
 
 @router.post("/upload")
 async def upload_pdf(
+    subject: str = Form(...),
+    unit: str = Form(...),
     file: UploadFile = File(...)
 ):
 
@@ -61,8 +63,8 @@ async def upload_pdf(
 
         add_chunks(
             chunks=chunks,
-            subject="General",
-            unit="Unit1",
+            subject=subject,
+            unit=unit,
             file_name=file.filename,
             page=page_data["page"]
         )
