@@ -1,3 +1,3 @@
 from services.vector_db import collection
 
-print("Documents:", collection.count())
+print(collection.count())

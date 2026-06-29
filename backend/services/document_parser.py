@@ -9,6 +9,7 @@ from services.parser_cache import (
     cache_document,
     get_cached_document
 )
+from services.rag import extract_pdf_text
 from services.parser_session import (
     record_document
 )
@@ -17,7 +18,8 @@ SUPPORTED_TYPES = {
     ".pptx",
     ".png",
     ".jpg",
-    ".jpeg"
+    ".jpeg",
+    ".pdf"
 }
 
 
@@ -49,8 +51,10 @@ def parse_document(file_path):
         validate_document(file_path)
 
         file_type = detect_document_type(file_path)
-
-        if file_type == ".pptx":
+        if file_type == ".pdf":
+            result = extract_pdf_text(file_path)
+        
+        elif file_type == ".pptx":
             result = extract_text_from_pptx(file_path)
 
         elif file_type in [".png", ".jpg", ".jpeg"]:

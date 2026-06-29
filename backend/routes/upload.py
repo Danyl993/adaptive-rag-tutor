@@ -5,6 +5,7 @@ import shutil
 from services.vector_db import add_chunks
 from services.rag import extract_pdf_text
 from services.chunker import chunk_text
+from services.document_parser import parse_document
 
 router = APIRouter()
 
@@ -26,15 +27,31 @@ async def upload_pdf(
 
         temp_path = temp_file.name
 
-    pages = extract_pdf_text(
-        temp_path
+    result = parse_document(
+    temp_path
     )
-    for page in pages:
-        print(
-            f"Page {page['page']} length:",
-            len(page["text"])
-        )
-    total_chunks = 0
+    if isinstance(result, dict):
+
+        if result.get("success") is False:
+
+            return result
+    
+    if isinstance(result, list):
+
+        pages = result
+
+    else:
+
+        pages = [
+            {
+                "page": 1,
+                "text": result
+            }
+        ]
+
+    for page_data in pages:
+        
+        total_chunks = 0
 
     for page_data in pages:
 
