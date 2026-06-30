@@ -1,26 +1,72 @@
+"use client";
+
+import { useState } from "react";
+
 import Message from "./Message";
 import ChatInput from "./ChatInput";
 
+import { getContext } from "@/services/search";
+
 export default function ChatPanel() {
+
+  const [message, setMessage] = useState(
+    "Welcome to Adaptive RAG Tutor."
+  );
+
+  const [context, setContext] = useState(
+    "Relevant study material will appear here."
+  );
+
+  async function handleQuestion(question) {
+
+    try {
+
+      const result = await getContext(
+        question,
+        "OS",
+        "U1"
+      );
+
+      setMessage(question);
+
+      setContext(result.context);
+
+    } catch (err) {
+
+      console.error(err);
+
+      setContext(
+        "Failed to retrieve study material."
+      );
+
+    }
+  }
+
   return (
     <div className="border border-gray-800 rounded p-4 h-full">
+
       <h2 className="font-bold mb-4">
         Chat
       </h2>
 
-      <Message text="Welcome to Adaptive RAG Tutor." />
+      <Message text={message} />
 
       <div className="mt-4 p-3 bg-gray-900 rounded">
+
         <h3 className="font-bold mb-2">
           Retrieved Context
         </h3>
 
         <p>
-          Relevant study material will appear here.
+          {context}
         </p>
+
       </div>
 
-      <ChatInput />
+      <ChatInput
+        onSend={handleQuestion}
+      />
+
     </div>
   );
 }
