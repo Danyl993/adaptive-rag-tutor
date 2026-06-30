@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { uploadFile } from "@/services/upload";
 
-export default function UploadPanel() {
-
+export default function UploadPanel({
+    subject,
+    unit,
+  }) {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -33,8 +35,8 @@ export default function UploadPanel() {
 
       const formData = new FormData();
 
-      formData.append("subject", "OS");
-      formData.append("unit", "U1");
+      formData.append("subject", subject);
+      formData.append("unit", unit);
       formData.append("file", file);
 
       await uploadFile(formData);

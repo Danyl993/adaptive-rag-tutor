@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getLearnData } from "@/services/learn";
 import PageLayout from "@/components/PageLayout";
 import SubjectSelector from "@/components/SubjectSelector";
@@ -10,6 +10,8 @@ import ChatPanel from "@/components/ChatPanel";
 import TopicsSidebar from "@/components/TopicsSidebar";
 
 export default function LearnPage() {
+  const [subject, setSubject] = useState("OS");
+  const [unit, setUnit] = useState("U1");
   useEffect(() => {
     async function loadData() {
       try {
@@ -31,19 +33,31 @@ return (
     </h1>
 
     <div className="mt-6">
-      <SubjectSelector />
+      <SubjectSelector
+        subject={subject}
+        setSubject={setSubject}
+      />    
     </div>
 
     <div className="mt-4">
-      <UnitSelector />
+      <UnitSelector
+        unit={unit}
+        setUnit={setUnit}
+      />
     </div>
 
     <div className="mt-6">
-      <UploadPanel />
+      <UploadPanel
+        subject={subject}
+        unit={unit}
+      />
     </div>
 
     <div className="mt-6">
-      <ChatPanel />
+      <ChatPanel
+        subject={subject}
+        unit={unit}
+      />
     </div>
 
     <div className="mt-6">

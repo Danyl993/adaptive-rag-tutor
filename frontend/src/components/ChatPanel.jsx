@@ -7,8 +7,10 @@ import ChatInput from "./ChatInput";
 
 import { getContext } from "@/services/search";
 
-export default function ChatPanel() {
-
+export default function ChatPanel({
+    subject,
+    unit,
+  }) {
   const [message, setMessage] = useState(
     "Welcome to Adaptive RAG Tutor."
   );
@@ -23,8 +25,8 @@ export default function ChatPanel() {
 
       const result = await getContext(
         question,
-        "OS",
-        "U1"
+        subject,
+        unit
       );
 
       setMessage(question);
