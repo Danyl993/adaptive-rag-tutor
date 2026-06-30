@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-
+from services.tutor import tutor_response
 from services.vector_db import (
     get_topic_context,
     search,
@@ -37,8 +37,14 @@ def topic_context(
     unit: str
 ):
 
-    return get_topic_context(
+    retrieved = get_topic_context(
         query,
         subject,
         unit
+    )
+
+    return tutor_response(
+        question=query,
+        context=retrieved["context"],
+        sources=retrieved["sources"]
     )

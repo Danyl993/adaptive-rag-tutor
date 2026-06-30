@@ -31,7 +31,7 @@ export default function ChatPanel({
 
       setMessage(question);
 
-      setContext(result.context);
+      setContext(result.answer);
 
     } catch (err) {
 
@@ -56,7 +56,8 @@ export default function ChatPanel({
       <div className="mt-4 p-3 bg-gray-900 rounded">
 
         <h3 className="font-bold mb-2">
-          Retrieved Context
+          Tutor Response
+
         </h3>
 
         <p>
