@@ -12,6 +12,7 @@ from routes.search import router as search_router
 from routes.files import router as files_router
 from fastapi.middleware.cors import CORSMiddleware
 from services.history import init_db
+from routes.mcq import router as mcq_router
 
 app = FastAPI()
 init_db()
@@ -43,3 +44,4 @@ app.include_router(cleanup_router)
 app.include_router(stats_router)
 app.include_router(search_router)
 app.include_router(files_router)
+app.include_router(mcq_router)
