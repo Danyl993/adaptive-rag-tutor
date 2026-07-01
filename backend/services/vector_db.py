@@ -86,3 +86,26 @@ def get_topic_context(
         ),
         "sources": results["metadata"][0]
     }
+
+def get_unit_context(
+    subject,
+    unit
+):
+
+    results = collection.get(
+
+        where={
+            "$and": [
+                {"subject": subject},
+                {"unit": unit}
+            ]
+        }
+
+    )
+
+    documents = results.get(
+        "documents",
+        []
+    )
+
+    return "\n\n".join(documents)
