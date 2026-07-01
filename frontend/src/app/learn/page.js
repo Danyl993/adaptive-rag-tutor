@@ -8,6 +8,7 @@ import UnitSelector from "@/components/UnitSelector";
 import UploadPanel from "@/components/UploadPanel";
 import ChatPanel from "@/components/ChatPanel";
 import TopicsSidebar from "@/components/TopicsSidebar";
+import HistoryPanel from "@/components/HistoryPanel";
 
 export default function LearnPage() {
   const [subject, setSubject] = useState("OS");
@@ -58,6 +59,10 @@ return (
         subject={subject}
         unit={unit}
       />
+    </div>
+
+    <div className="mt-6">
+      <HistoryPanel />
     </div>
 
     <div className="mt-6">
