@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from services.tutor import tutor_response
+from services.history import save_history
 from services.vector_db import (
     get_topic_context,
     search,
@@ -38,13 +39,20 @@ def topic_context(
 ):
 
     retrieved = get_topic_context(
-        query,
-        subject,
-        unit
-    )
+    query,
+    subject,
+    unit
+)
 
-    return tutor_response(
+    response = tutor_response(
         question=query,
         context=retrieved["context"],
         sources=retrieved["sources"]
     )
+
+    save_history(
+        question=query,
+        answer=response["answer"]
+    )
+
+    return response

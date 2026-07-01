@@ -11,9 +11,10 @@ from routes.stats import router as stats_router
 from routes.search import router as search_router
 from routes.files import router as files_router
 from fastapi.middleware.cors import CORSMiddleware
+from services.history import init_db
 
 app = FastAPI()
-
+init_db()
 
 @app.get("/")
 def root():
