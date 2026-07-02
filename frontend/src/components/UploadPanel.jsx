@@ -4,33 +4,31 @@ import { useState } from "react";
 import { uploadFile } from "@/services/upload";
 
 export default function UploadPanel({
-    subject,
-    unit,
-  }) {
+  subject,
+  unit,
+}) {
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("");
   const [uploading, setUploading] = useState(false);
 
   function handleFileChange(e) {
-
     const selectedFile = e.target.files[0];
 
     setFile(selectedFile);
+    setStatus("");
 
     if (selectedFile) {
-      setStatus("File selected successfully");
+      setStatus("File selected successfully.");
     }
   }
 
   async function handleUpload() {
-
     if (!file) {
-      setStatus("Please select a file first");
+      setStatus("Please select a file before uploading.");
       return;
     }
 
     try {
-
       setUploading(true);
 
       const formData = new FormData();
@@ -41,17 +39,19 @@ export default function UploadPanel({
 
       await uploadFile(formData);
 
-      setStatus("Upload successful");
+      setStatus("File uploaded successfully.");
+
+      setFile(null);
 
     } catch (err) {
-
       console.error(err);
-      setStatus("Upload failed");
+
+      setStatus(
+        "Upload failed. Please check that the backend is running and the file type is supported."
+      );
 
     } finally {
-
       setUploading(false);
-
     }
   }
 
@@ -65,12 +65,13 @@ export default function UploadPanel({
       <input
         type="file"
         onChange={handleFileChange}
+        disabled={uploading}
       />
 
       <button
         onClick={handleUpload}
         disabled={uploading}
-        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
+        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {uploading ? "Uploading..." : "Upload"}
       </button>
@@ -82,7 +83,13 @@ export default function UploadPanel({
       )}
 
       {status && (
-        <p className="mt-2 text-green-400">
+        <p
+          className={`mt-2 ${
+            status.toLowerCase().includes("failed")
+              ? "text-red-400"
+              : "text-green-400"
+          }`}
+        >
           {status}
         </p>
       )}

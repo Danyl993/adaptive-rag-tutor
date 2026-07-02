@@ -14,10 +14,13 @@ export default function ExamPage() {
   const [unit, setUnit] = useState("U1");
 
   const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function startExamMode() {
 
     try {
+
+      setLoading(true);
 
       const data = await getExamData(
         subject,
@@ -37,8 +40,17 @@ export default function ExamPage() {
       console.error(err);
 
       setResult(
-        "Failed to load exam mode."
+`Unable to start Exam Mode.
+
+Please make sure:
+• FastAPI backend is running
+• Study material has been uploaded
+• Subject and Unit are selected`
       );
+
+    } finally {
+
+      setLoading(false);
 
     }
 
@@ -72,9 +84,10 @@ export default function ExamPage() {
 
       <button
         onClick={startExamMode}
-        className="mt-6 bg-blue-600 text-white px-4 py-2 rounded"
+        disabled={loading}
+        className="mt-6 bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Start Exam Mode
+        {loading ? "Loading..." : "Start Exam Mode"}
       </button>
 
       <div className="mt-6 border border-gray-800 rounded p-4">
@@ -84,7 +97,12 @@ export default function ExamPage() {
         </h2>
 
         <pre className="whitespace-pre-wrap">
-          {result}
+
+          {result || `Exam mode is ready.
+
+Select a subject and unit, then click
+"Start Exam Mode".`}
+
         </pre>
 
       </div>

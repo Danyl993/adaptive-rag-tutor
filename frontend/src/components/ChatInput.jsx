@@ -5,34 +5,56 @@ import { useState } from "react";
 export default function ChatInput({ onSend }) {
 
   const [question, setQuestion] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  function handleSend() {
+  async function handleSend() {
 
-    if (!question.trim()) return;
+    if (!question.trim() || loading) return;
 
-    onSend(question);
+    try {
 
-    setQuestion("");
+      setLoading(true);
+
+      await onSend(question);
+
+      setQuestion("");
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
   }
 
   return (
+
     <div className="mt-4 flex gap-2">
 
       <input
         type="text"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleSend();
+          }
+        }}
         placeholder="Ask a question..."
-        className="flex-1 bg-gray-800 p-2 rounded"
+        disabled={loading}
+        className="flex-1 bg-gray-800 p-2 rounded disabled:opacity-50"
       />
 
       <button
         onClick={handleSend}
-        className="bg-blue-600 px-4 rounded"
+        disabled={loading}
+        className="bg-blue-600 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Send
+        {loading ? "Thinking..." : "Send"}
       </button>
 
     </div>
+
   );
+
 }

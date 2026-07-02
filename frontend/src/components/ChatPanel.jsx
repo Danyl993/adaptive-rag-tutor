@@ -8,15 +8,16 @@ import ChatInput from "./ChatInput";
 import { getContext } from "@/services/search";
 
 export default function ChatPanel({
-    subject,
-    unit,
-  }) {
+  subject,
+  unit,
+}) {
+
   const [message, setMessage] = useState(
-    "Welcome to Adaptive RAG Tutor."
+    "Welcome to Adaptive RAG Tutor!"
   );
 
   const [context, setContext] = useState(
-    "Relevant study material will appear here."
+    "Ask a question to retrieve information from your uploaded study material."
   );
 
   async function handleQuestion(question) {
@@ -38,13 +39,20 @@ export default function ChatPanel({
       console.error(err);
 
       setContext(
-        "Failed to retrieve study material."
+`Unable to retrieve study material.
+
+Please check:
+• FastAPI backend is running
+• The correct Subject and Unit are selected
+• Study material has been uploaded`
       );
 
     }
+
   }
 
   return (
+
     <div className="border border-gray-800 rounded p-4 h-full">
 
       <h2 className="font-bold mb-4">
@@ -57,10 +65,9 @@ export default function ChatPanel({
 
         <h3 className="font-bold mb-2">
           Tutor Response
-
         </h3>
 
-        <p>
+        <p className="whitespace-pre-wrap">
           {context}
         </p>
 
@@ -71,5 +78,7 @@ export default function ChatPanel({
       />
 
     </div>
+
   );
+
 }

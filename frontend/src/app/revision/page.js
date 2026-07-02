@@ -14,10 +14,13 @@ export default function RevisionPage() {
   const [unit, setUnit] = useState("U1");
 
   const [notes, setNotes] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function generateRevision() {
 
     try {
+
+      setLoading(true);
 
       const data = await getRevisionData(
         subject,
@@ -30,7 +33,17 @@ export default function RevisionPage() {
 
       console.error(err);
 
-      setNotes("Failed to generate revision notes.");
+      setNotes(
+`Unable to generate revision notes.
+
+Please make sure:
+• FastAPI backend is running
+• Notes have been uploaded for this subject/unit`
+      );
+
+    } finally {
+
+      setLoading(false);
 
     }
 
@@ -64,9 +77,10 @@ export default function RevisionPage() {
 
       <button
         onClick={generateRevision}
-        className="mt-6 bg-blue-600 text-white px-4 py-2 rounded"
+        disabled={loading}
+        className="mt-6 bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Generate Revision Notes
+        {loading ? "Generating..." : "Generate Revision Notes"}
       </button>
 
       <div className="mt-6 border border-gray-800 rounded p-4">
@@ -76,7 +90,12 @@ export default function RevisionPage() {
         </h2>
 
         <pre className="whitespace-pre-wrap">
-          {notes}
+
+          {notes || `No revision notes generated yet.
+
+Select a subject and unit, then click
+"Generate Revision Notes".`}
+
         </pre>
 
       </div>
