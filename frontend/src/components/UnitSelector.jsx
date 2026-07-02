@@ -6,7 +6,7 @@ export default function UnitSelector({
     <select
       value={unit}
       onChange={(e) => setUnit(e.target.value)}
-      className="bg-gray-800 text-white px-3 py-2 rounded"
+      className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
     >
       <option value="U1">Unit 1</option>
       <option value="U2">Unit 2</option>
