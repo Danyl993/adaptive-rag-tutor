@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { getHistory } from "@/services/history";
 
 export default function HistoryPanel() {
@@ -32,36 +31,42 @@ export default function HistoryPanel() {
 
   return (
 
-    <div className="border border-gray-800 rounded p-4">
+    <div className="border border-gray-800 rounded-lg p-4 bg-gray-900">
 
-      <h2 className="font-bold mb-4">
+      <h2 className="text-lg font-semibold mb-4">
         Conversation History
       </h2>
 
       {history.length === 0 ? (
 
-        <p>No history found.</p>
+        <p className="text-gray-400">
+          No previous conversations yet.
+        </p>
 
       ) : (
 
-        history.map((item) => (
+        <div className="space-y-4">
 
-          <div
-            key={item[0]}
-            className="mb-4 border-b border-gray-700 pb-3"
-          >
+          {history.map((item) => (
 
-            <p className="font-semibold">
-              Q: {item[1]}
-            </p>
+            <div
+              key={item[0]}
+              className="border border-gray-700 rounded-lg p-3"
+            >
 
-            <p className="text-gray-300 mt-2">
-              A: {item[2]}
-            </p>
+              <p className="font-semibold text-blue-400">
+                Q: {item[1]}
+              </p>
 
-          </div>
+              <p className="mt-2 text-gray-300">
+                {item[2]}
+              </p>
 
-        ))
+            </div>
+
+          ))}
+
+        </div>
 
       )}
 
