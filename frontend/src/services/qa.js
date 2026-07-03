@@ -1,26 +1,20 @@
 import API from "./api";
 
-export async function getContext(
-  query,
+export async function askQuestion(
+  question,
   subject,
-  unit,
-  topic,
-  lesson
+  unit
 ) {
-
   const res = await API.get(
     "/context",
     {
       params: {
-        query,
+        query: question,
         subject,
         unit,
-        topic,
-        lesson
-      }
+      },
     }
   );
 
   return res.data;
-
 }

@@ -1,26 +1,20 @@
 import API from "./api";
 
-export async function getContext(
-  query,
+export async function getTopicLesson(
   subject,
   unit,
-  topic,
-  lesson
+  topic
 ) {
-
   const res = await API.get(
-    "/context",
+    "/learn/topic",
     {
       params: {
-        query,
         subject,
         unit,
         topic,
-        lesson
-      }
+      },
     }
   );
 
   return res.data;
-
 }

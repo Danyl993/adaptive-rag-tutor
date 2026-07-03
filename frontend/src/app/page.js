@@ -6,8 +6,11 @@ import ModeSelector from "@/components/ModeSelector";
 import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
 import ChatPanel from "@/components/ChatPanel";
+import { useState } from "react";
 
 export default function Home() {
+  const [subject, setSubject] = useState("OS");
+  const [unit, setUnit] = useState("U1");
   async function testBackend() {
     try {
       const res = await API.get("/");
@@ -23,8 +26,15 @@ export default function Home() {
         <ModeSelector />
       </div>
       <div className="p-4 border-b border-gray-800 flex gap-4">
-        <SubjectSelector />
-        <UnitSelector />
+        <SubjectSelector
+          subject={subject}
+          setSubject={setSubject}
+        />
+
+        <UnitSelector
+          unit={unit}
+          setUnit={setUnit}
+        />
       </div>
       <div className="border-b border-gray-800 p-4">
         <h1 className="text-3xl font-bold">
@@ -47,7 +57,10 @@ export default function Home() {
         </div>
 
         <div className="md:col-span-8 p-4">
-          <ChatPanel />
+          <ChatPanel
+            subject={subject}
+            unit={unit}
+          />
         </div>
 
         <div className="md:col-span-2 border-l border-gray-800 p-4">

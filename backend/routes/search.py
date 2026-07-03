@@ -1,4 +1,7 @@
+from typing import Optional
+
 from fastapi import APIRouter
+
 from services.tutor import tutor_response
 from services.history import save_history
 from services.vector_db import (
@@ -31,23 +34,28 @@ def filtered_search(
         unit
     )
 
+
 @router.get("/context")
 def topic_context(
     query: str,
     subject: str,
-    unit: str
+    unit: str,
+    topic: Optional[str] = None,
+    lesson: Optional[str] = None
 ):
 
     retrieved = get_topic_context(
-    query,
-    subject,
-    unit
-)
+        query,
+        subject,
+        unit
+    )
 
     response = tutor_response(
         question=query,
         context=retrieved["context"],
-        sources=retrieved["sources"]
+        sources=retrieved["sources"],
+        topic=topic,
+        lesson=lesson
     )
 
     save_history(

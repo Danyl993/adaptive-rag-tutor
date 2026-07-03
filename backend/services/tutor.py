@@ -5,7 +5,9 @@ def tutor_response(
     question,
     context,
     sources,
-    style="normal"
+    style="normal",
+    topic=None,
+    lesson=None
 ):
 
     prompt = f"""
@@ -14,19 +16,24 @@ You are an academic tutor.
 Explanation Style:
 {style}
 
-Sources:
-{sources}
+Current Topic:
+{topic if topic else "Not specified"}
 
-Context:
+Current Lesson:
+{lesson if lesson else "No lesson available"}
+
+Study Material:
 {context}
 
-Question:
+Student Question:
 {question}
 
-Answer according to the explanation style.
-
-Only use information from the provided context.
-Mention source references when possible.
+Instructions:
+- If a lesson is provided, treat this as a follow-up question.
+- Do NOT repeat the entire lesson unless the student asks.
+- Answer only what the student asked.
+- Use the study material.
+- Mention source references when possible.
 
 At the end add:
 Source: <source reference>
@@ -37,4 +44,85 @@ Source: <source reference>
     return {
         "answer": answer,
         "source": sources
+    }
+
+def teach_topic(
+    topic,
+    context,
+    style="simple"
+):
+
+    prompt = f"""
+You are an excellent university professor.
+
+Teach ONLY this topic:
+
+{topic}
+
+Use ONLY the study material below.
+
+Study Material:
+{context}
+
+Instructions:
+- Explain in simple words.
+- Assume the student is learning this topic for the first time.
+- Do not explain unrelated topics.
+- Use headings.
+- Give one small example if possible.
+- End with 2 quick recap points.
+"""
+
+    lesson = generate_response(prompt)
+
+    return {
+        "lesson": lesson
+    }
+
+def explain_simpler(lesson):
+
+    prompt = f"""
+You are an excellent university professor.
+
+Rewrite the lesson below in much simpler words.
+
+Rules:
+- Keep all important points.
+- Use very simple English.
+- Explain like you are teaching a beginner.
+- Use one small real-life example if possible.
+- Do not add new information.
+
+Lesson:
+{lesson}
+"""
+
+    simplified = generate_response(prompt)
+
+    return {
+        "lesson": simplified
+    }
+
+def explain_better(lesson):
+
+    prompt = f"""
+You are an excellent university professor.
+
+Rewrite the lesson below in more detail.
+
+Rules:
+- Explain every important point.
+- Add more details.
+- Give examples where useful.
+- Do not remove any existing information.
+- Do not add unrelated topics.
+
+Lesson:
+{lesson}
+"""
+
+    detailed = generate_response(prompt)
+
+    return {
+        "lesson": detailed
     }

@@ -6,10 +6,13 @@ import Message from "./Message";
 import ChatInput from "./ChatInput";
 
 import { getContext } from "@/services/search";
+import { explainSimpler } from "@/services/explain";
 
 export default function ChatPanel({
   subject,
   unit,
+  lesson,
+  selectedTopic,
 }) {
 
   const [message, setMessage] = useState(
@@ -17,7 +20,7 @@ export default function ChatPanel({
   );
 
   const [context, setContext] = useState(
-    "Ask a question to retrieve information from your uploaded study material."
+    "Select a topic from the sidebar to begin learning."
   );
 
   async function handleQuestion(question) {
@@ -27,7 +30,9 @@ export default function ChatPanel({
       const result = await getContext(
         question,
         subject,
-        unit
+        unit,
+        selectedTopic,
+        lesson
       );
 
       setMessage(question);
@@ -51,6 +56,29 @@ Please check:
 
   }
 
+  async function handleExplainSimpler() {
+
+    if (!lesson) return;
+
+    try {
+
+      const result = await explainSimpler(lesson);
+
+      setContext(result.lesson);
+
+    } catch (err) {
+
+      console.error(err);
+
+    }
+
+  }
+
+  const displayText =
+    context !== "Select a topic from the sidebar to begin learning."
+      ? context
+      : lesson;
+
   return (
 
     <div className="border border-gray-800 rounded p-4 h-full">
@@ -64,14 +92,27 @@ Please check:
       <div className="mt-4 p-3 bg-gray-900 rounded">
 
         <h3 className="font-bold mb-2">
-          Tutor Response
+          {selectedTopic
+            ? `Learning: ${selectedTopic}`
+            : "Tutor Response"}
         </h3>
 
         <p className="whitespace-pre-wrap">
-          {context}
+          {displayText}
         </p>
 
       </div>
+
+      {lesson && (
+
+        <button
+          onClick={handleExplainSimpler}
+          className="mt-4 bg-green-600 text-white px-4 py-2 rounded"
+        >
+          Explain Simpler
+        </button>
+
+      )}
 
       <ChatInput
         onSend={handleQuestion}
