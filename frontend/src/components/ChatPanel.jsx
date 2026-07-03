@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Message from "./Message";
 import ChatInput from "./ChatInput";
-
+import { explainBetter } from "@/services/explainBetter";
 import { getContext } from "@/services/search";
 import { explainSimpler } from "@/services/explain";
 
@@ -74,6 +74,24 @@ Please check:
 
   }
 
+  async function handleExplainBetter() {
+
+  if (!lesson) return;
+
+  try {
+
+    const result = await explainBetter(lesson);
+
+    setContext(result.lesson);
+
+  } catch (err) {
+
+    console.error(err);
+
+  }
+
+}
+
   const displayText =
     context !== "Select a topic from the sidebar to begin learning."
       ? context
@@ -113,6 +131,17 @@ Please check:
         </button>
 
       )}
+
+      {lesson && (
+
+  <button
+    onClick={handleExplainBetter}
+    className="mt-2 ml-2 bg-purple-600 text-white px-4 py-2 rounded"
+    >
+      Explain Better
+    </button>
+
+  )}
 
       <ChatInput
         onSend={handleQuestion}
