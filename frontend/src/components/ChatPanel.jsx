@@ -99,49 +99,57 @@ Please check:
 
   return (
 
-    <div className="border border-gray-800 rounded p-4 h-full">
+    <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-lg">
 
-      <h2 className="font-bold mb-4">
-        Chat
-      </h2>
+      <div className="mb-6">
 
-      <Message text={message} />
-
-      <div className="mt-4 p-3 bg-gray-900 rounded">
-
-        <h3 className="font-bold mb-2">
+        <h2 className="text-2xl font-bold">
           {selectedTopic
-            ? `Learning: ${selectedTopic}`
-            : "Tutor Response"}
-        </h3>
+            ? selectedTopic
+            : "AI Tutor"}
+        </h2>
 
-        <p className="whitespace-pre-wrap">
-          {displayText}
+        <p className="mt-1 text-slate-400">
+          Learn, ask doubts and continue the conversation.
         </p>
+
+      </div>
+
+      <div className="rounded-xl border border-slate-800 bg-slate-950 p-5 min-h-[350px]">
+
+        <Message text={message} />
+
+        <div className="mt-5">
+
+          <p className="whitespace-pre-wrap leading-8 text-slate-300">
+            {displayText}
+          </p>
+
+        </div>
 
       </div>
 
       {lesson && (
 
-        <button
-          onClick={handleExplainSimpler}
-          className="mt-4 bg-green-600 text-white px-4 py-2 rounded"
-        >
-          Explain Simpler
-        </button>
+        <div className="mt-5 flex flex-wrap gap-3">
+
+          <button
+            onClick={handleExplainSimpler}
+            className="rounded-xl bg-green-600 px-5 py-2 font-medium text-white hover:bg-green-500"
+          >
+            Explain Simpler
+          </button>
+
+          <button
+            onClick={handleExplainBetter}
+            className="rounded-xl bg-purple-600 px-5 py-2 font-medium text-white hover:bg-purple-500"
+          >
+            Explain Better
+          </button>
+
+        </div>
 
       )}
-
-      {lesson && (
-
-  <button
-    onClick={handleExplainBetter}
-    className="mt-2 ml-2 bg-purple-600 text-white px-4 py-2 rounded"
-    >
-      Explain Better
-    </button>
-
-  )}
 
       <ChatInput
         onSend={handleQuestion}
