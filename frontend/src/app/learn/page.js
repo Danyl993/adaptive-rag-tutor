@@ -76,63 +76,71 @@ export default function LearnPage() {
 
     <PageLayout>
 
-      <h1 className="text-3xl font-bold">
-        Learn Mode
-      </h1>
+      <div className="mb-8">
 
-      <div className="mt-6">
+        <h1 className="text-4xl font-bold">
+          Learn Mode
+        </h1>
 
-        <SubjectSelector
-          subject={subject}
-          setSubject={setSubject}
-        />
-
-      </div>
-
-      <div className="mt-4">
-
-        <UnitSelector
-          unit={unit}
-          setUnit={setUnit}
-        />
+        <p className="mt-2 text-slate-400">
+          Select a subject, choose a topic and start learning.
+        </p>
 
       </div>
 
-      <div className="mt-6">
+      <div className="grid grid-cols-12 gap-6">
 
-        <UploadPanel
-          subject={subject}
-          unit={unit}
-        />
+        {/* Left Sidebar */}
 
-      </div>
+        <div className="col-span-3 space-y-6">
 
-      <div className="mt-6">
+          <SubjectSelector
+            subject={subject}
+            setSubject={setSubject}
+          />
 
-        <TopicsSidebar
-          subject={subject}
-          unit={unit}
-          onTopicSelect={handleTopicSelect}
-        />
+          <UnitSelector
+            unit={unit}
+            setUnit={setUnit}
+          />
 
-      </div>
+          <TopicsSidebar
+            subject={subject}
+            unit={unit}
+            onTopicSelect={handleTopicSelect}
+          />
 
-      
+        </div>
 
-      <div className="mt-6">
+        {/* Center */}
 
-        <ChatPanel
-          subject={subject}
-          unit={unit}
-          lesson={lesson}
-          selectedTopic={selectedTopic}
-        />
+        <div className="col-span-6">
 
-      </div>
+          <ChatPanel
+            subject={subject}
+            unit={unit}
+            lesson={
+              loadingLesson
+                ? "Generating lesson..."
+                : lesson
+            }
+            selectedTopic={selectedTopic}
+          />
 
-      <div className="mt-6">
+        </div>
 
-        <HistoryPanel />
+        {/* Right Sidebar */}
+
+        <div className="col-span-3 space-y-6">
+
+          <UploadPanel
+            subject={subject}
+            unit={unit}
+          />
+
+          <HistoryPanel />
+
+        </div>
 
       </div>
 
