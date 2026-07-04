@@ -20,7 +20,7 @@ export default function Navbar() {
           Semester 5
         </div>
 
-        <div className="h-10 w-10 rounded-full bg-blue-600 flex items-center justify-center font-bold">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 font-bold">
           D
         </div>
 

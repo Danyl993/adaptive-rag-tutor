@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import Navbar from "@/components/Navbar";
 import { getLearnData } from "@/services/learn";
 import { getTopicLesson } from "@/services/learnTopic";
 import PageLayout from "@/components/PageLayout";
@@ -75,18 +75,8 @@ export default function LearnPage() {
   return (
 
     <PageLayout>
-
-      <div className="mb-8">
-
-        <h1 className="text-4xl font-bold">
-          Learn Mode
-        </h1>
-
-        <p className="mt-2 text-slate-400">
-          Select a subject, choose a topic and start learning.
-        </p>
-
-      </div>
+      <Navbar />
+      
 
       <div className="grid grid-cols-12 gap-6">
 

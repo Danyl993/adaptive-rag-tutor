@@ -5,7 +5,7 @@ import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
-
+import Navbar from "@/components/Navbar";
 import { getExamData } from "@/services/exam";
 
 export default function ExamPage() {
@@ -59,10 +59,7 @@ Please make sure:
   return (
 
     <PageLayout>
-
-      <h1 className="text-3xl font-bold">
-        Exam Mode
-      </h1>
+      <Navbar />
 
       <div className="mt-6">
 

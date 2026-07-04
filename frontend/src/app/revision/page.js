@@ -5,7 +5,7 @@ import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
-
+import Navbar from "@/components/Navbar";
 import { getRevisionData } from "@/services/revision";
 
 export default function RevisionPage() {
@@ -52,10 +52,7 @@ Please make sure:
   return (
 
     <PageLayout>
-
-      <h1 className="text-3xl font-bold">
-        Revision Mode
-      </h1>
+      <Navbar />
 
       <div className="mt-6">
 

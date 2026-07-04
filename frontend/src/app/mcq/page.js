@@ -5,7 +5,7 @@ import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
-
+import Navbar from "@/components/Navbar";
 import { getMCQs } from "@/services/mcq";
 
 export default function MCQPage() {
@@ -52,10 +52,7 @@ Please make sure:
   return (
 
     <PageLayout>
-
-      <h1 className="text-3xl font-bold">
-        MCQ Practice
-      </h1>
+      <Navbar />
 
       <div className="mt-6">
 
