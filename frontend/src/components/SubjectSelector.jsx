@@ -6,7 +6,7 @@ export default function SubjectSelector({
     <select
       value={subject}
       onChange={(e) => setSubject(e.target.value)}
-      className="w-full bg-gray-800 border border-gray-700 text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-white focus:border-blue-500 focus:outline-none"
     >
       <option value="OS">Operating Systems</option>
       <option value="CN">Computer Networks</option>
