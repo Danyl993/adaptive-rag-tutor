@@ -29,7 +29,7 @@ export default function ChatInput({ onSend }) {
 
   return (
 
-    <div className="mt-4 flex gap-2">
+    <div className="mt-6 flex gap-3">
 
       <input
         type="text"
@@ -40,15 +40,15 @@ export default function ChatInput({ onSend }) {
             handleSend();
           }
         }}
-        placeholder="Ask a question..."
+        placeholder="Ask a follow-up question..."
         disabled={loading}
-        className="flex-1 bg-gray-800 p-2 rounded disabled:opacity-50"
+        className="flex-1 rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-white placeholder:text-slate-400 focus:border-blue-500 focus:outline-none disabled:opacity-50"
       />
 
       <button
         onClick={handleSend}
         disabled={loading}
-        className="bg-blue-600 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+        className="rounded-xl bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading ? "Thinking..." : "Send"}
       </button>
