@@ -3,7 +3,7 @@ from typing import Optional
 from fastapi import APIRouter
 
 from services.tutor import tutor_response
-from services.history import save_history
+from services.history import DB_PATH, save_history
 from services.vector_db import (
     get_topic_context,
     search,
@@ -37,13 +37,14 @@ def filtered_search(
 
 @router.get("/context")
 def topic_context(
+    
     query: str,
     subject: str,
     unit: str,
     topic: Optional[str] = None,
     lesson: Optional[str] = None
 ):
-
+    print("Context endpoint called")
     retrieved = get_topic_context(
         query,
         subject,
@@ -58,9 +59,17 @@ def topic_context(
         lesson=lesson
     )
 
-    save_history(
-        question=query,
-        answer=response["answer"]
-    )
+    try:
+        save_history(
+            question=query,
+            answer=response["answer"],
+            subject=subject,
+            unit=unit,
+            mode="Learn"
+        )
+        print("History saved successfully")
+        print("Using DB:", DB_PATH)
+    except Exception as e:
+        print("History save failed:", e)
 
     return response
