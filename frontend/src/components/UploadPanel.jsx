@@ -71,7 +71,7 @@ export default function UploadPanel({
 
       <div className="flex items-center gap-3 mb-5">
 
-        <Upload className="text-blue-500" size={24} />
+        <Upload className="text-emerald-500" size={24} />
 
         <h2 className="text-xl font-semibold">
           Upload Study Material
@@ -79,17 +79,23 @@ export default function UploadPanel({
 
       </div>
 
+      <label className="block">
       <input
         type="file"
         onChange={handleFileChange}
         disabled={uploading}
-        className="w-full rounded-xl border border-slate-700 bg-slate-800 p-3 file:mr-4 file:rounded-lg file:border-0 file:bg-blue-600 file:px-4 file:py-2 file:text-white hover:file:bg-blue-500"
+        className="hidden"
       />
+
+      <span className="flex cursor-pointer justify-center rounded-xl bg-slate-700 px-5 py-3 font-medium text-white transition hover:bg-slate-600">
+        Choose File
+      </span>
+    </label>
 
       <button
         onClick={handleUpload}
         disabled={uploading}
-        className="mt-5 w-full rounded-xl bg-blue-600 px-5 py-3 font-medium text-white transition hover:bg-blue-500 disabled:opacity-50"
+        className="mt-4 w-full rounded-xl bg-emerald-600 px-5 py-3 font-medium text-white transition hover:bg-emerald-500 disabled:opacity-50"
       >
         {uploading ? "Uploading..." : "Upload PDF"}
       </button>

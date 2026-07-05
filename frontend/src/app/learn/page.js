@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import Navbar from "@/components/Navbar";
-import { getLearnData } from "@/services/learn";
-import { getTopicLesson } from "@/services/learnTopic";
+import NavigationSidebar from "@/components/NavigationSidebar";
 import PageLayout from "@/components/PageLayout";
 import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
-import UploadPanel from "@/components/UploadPanel";
-import ChatPanel from "@/components/ChatPanel";
 import TopicsSidebar from "@/components/TopicsSidebar";
-import HistoryPanel from "@/components/HistoryPanel";
+import ChatPanel from "@/components/ChatPanel";
+import UploadPanel from "@/components/UploadPanel";
+
+import { getLearnData } from "@/services/learn";
+import { getTopicLesson } from "@/services/learnTopic";
 
 export default function LearnPage() {
 
@@ -26,8 +28,7 @@ export default function LearnPage() {
 
       try {
 
-        const data = await getLearnData();
-        console.log(data);
+        await getLearnData();
 
       } catch (err) {
 
@@ -61,9 +62,7 @@ export default function LearnPage() {
 
       console.error(err);
 
-      setLesson(
-        "Failed to load lesson."
-      );
+      setLesson("Failed to load lesson.");
 
     } finally {
 
@@ -72,27 +71,40 @@ export default function LearnPage() {
     }
 
   }
+
   return (
 
     <PageLayout>
+
       <Navbar />
-      
+
+      <div className="mb-6 flex gap-4">
+
+        <SubjectSelector
+          subject={subject}
+          setSubject={setSubject}
+        />
+
+        <UnitSelector
+          unit={unit}
+          setUnit={setUnit}
+        />
+
+      </div>
 
       <div className="grid grid-cols-12 gap-6">
 
-        {/* Left Sidebar */}
+        {/* Study Tools */}
 
-        <div className="col-span-3 space-y-6">
+        <div className="col-span-2">
 
-          <SubjectSelector
-            subject={subject}
-            setSubject={setSubject}
-          />
+          <NavigationSidebar />
 
-          <UnitSelector
-            unit={unit}
-            setUnit={setUnit}
-          />
+        </div>
+
+        {/* Topics */}
+
+        <div className="col-span-3">
 
           <TopicsSidebar
             subject={subject}
@@ -102,9 +114,9 @@ export default function LearnPage() {
 
         </div>
 
-        {/* Center */}
+        {/* Chat */}
 
-        <div className="col-span-6">
+        <div className="col-span-5">
 
           <ChatPanel
             subject={subject}
@@ -119,16 +131,14 @@ export default function LearnPage() {
 
         </div>
 
-        {/* Right Sidebar */}
+        {/* Upload */}
 
-        <div className="col-span-3 space-y-6">
+        <div className="col-span-2">
 
           <UploadPanel
             subject={subject}
             unit={unit}
           />
-
-          <HistoryPanel />
 
         </div>
 
