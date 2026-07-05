@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { History } from "lucide-react";
 import { getHistory } from "@/services/history";
 
 export default function HistoryPanel() {
@@ -31,15 +32,21 @@ export default function HistoryPanel() {
 
   return (
 
-    <div className="border border-gray-800 rounded-lg p-4 bg-gray-900">
+    <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-lg">
 
-      <h2 className="text-lg font-semibold mb-4">
-        Conversation History
-      </h2>
+      <div className="mb-5 flex items-center gap-3">
+
+        <History className="text-blue-500" size={22} />
+
+        <h2 className="text-xl font-semibold">
+          Conversation History
+        </h2>
+
+      </div>
 
       {history.length === 0 ? (
 
-        <p className="text-gray-400">
+        <p className="text-slate-400">
           No previous conversations yet.
         </p>
 
@@ -51,14 +58,14 @@ export default function HistoryPanel() {
 
             <div
               key={item[0]}
-              className="border border-gray-700 rounded-lg p-3"
+              className="rounded-xl border border-slate-700 bg-slate-800/60 p-4"
             >
 
               <p className="font-semibold text-blue-400">
                 Q: {item[1]}
               </p>
 
-              <p className="mt-2 text-gray-300">
+              <p className="mt-3 text-slate-300">
                 {item[2]}
               </p>
 
