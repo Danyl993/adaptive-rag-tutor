@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { BookOpen } from "lucide-react";
 import { getTopics } from "@/services/topics";
 
 export default function TopicsSidebar({
@@ -38,26 +39,34 @@ export default function TopicsSidebar({
 
   return (
 
-    <div className="border border-gray-800 rounded p-4">
+    <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 shadow-lg">
 
-      <h2 className="font-bold mb-4">
-        Topics
-      </h2>
+      <div className="mb-5 flex items-center gap-3">
+
+        <BookOpen className="text-blue-500" size={22} />
+
+        <h2 className="text-xl font-semibold">
+          Topics
+        </h2>
+
+      </div>
 
       {topics.length === 0 ? (
 
-        <p>No topics found.</p>
+        <p className="text-slate-400">
+          No topics found.
+        </p>
 
       ) : (
 
-        <div className="flex flex-col gap-2">
+        <div className="space-y-3">
 
           {topics.map((topic) => (
 
             <button
               key={topic}
               onClick={() => onTopicSelect(topic)}
-              className="text-left bg-gray-800 hover:bg-blue-600 p-2 rounded transition"
+              className="w-full rounded-xl border border-slate-700 bg-slate-800/60 p-3 text-left text-slate-200 transition-all hover:border-blue-500 hover:bg-blue-600 hover:text-white"
             >
               {topic}
             </button>
