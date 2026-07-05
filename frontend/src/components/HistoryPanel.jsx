@@ -16,7 +16,7 @@ export default function HistoryPanel() {
 
         const data = await getHistory();
 
-        setHistory(data.history);
+        setHistory(data);
 
       } catch (err) {
 
@@ -39,7 +39,7 @@ export default function HistoryPanel() {
         <History className="text-blue-500" size={22} />
 
         <h2 className="text-xl font-semibold">
-          Conversation History
+          Recent Chats
         </h2>
 
       </div>
@@ -47,7 +47,7 @@ export default function HistoryPanel() {
       {history.length === 0 ? (
 
         <p className="text-slate-400">
-          No previous conversations yet.
+          No conversations yet.
         </p>
 
       ) : (
@@ -57,17 +57,29 @@ export default function HistoryPanel() {
           {history.map((item) => (
 
             <div
-              key={item[0]}
+              key={item.id}
               className="rounded-xl border border-slate-700 bg-slate-800/60 p-4"
             >
 
               <p className="font-semibold text-blue-400">
-                Q: {item[1]}
+                {item.question}
               </p>
 
-              <p className="mt-3 text-slate-300">
-                {item[2]}
+              <p className="mt-2 line-clamp-2 text-sm text-slate-300">
+                {item.answer}
               </p>
+
+              <div className="mt-3 flex justify-between text-xs text-slate-500">
+
+                <span>
+                  {item.subject} • {item.unit}
+                </span>
+
+                <span>
+                  {item.created_at}
+                </span>
+
+              </div>
 
             </div>
 
