@@ -41,7 +41,11 @@ export default function LearnPage() {
     loadData();
 
   }, []);
-
+  useEffect(() => {
+      setLesson("");
+      setSelectedTopic("");
+    }, [subject, unit]);
+    
   async function handleTopicSelect(topic) {
 
     setSelectedTopic(topic);
@@ -149,3 +153,8 @@ export default function LearnPage() {
   );
 
 }
+
+useEffect(() => {
+  setLesson("");
+  setSelectedTopic("");
+}, [subject, unit]);
