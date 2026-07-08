@@ -1,5 +1,6 @@
 import chromadb
 
+from services.bm25 import build_bm25, bm25_search
 client = chromadb.PersistentClient(
     path="backend/data/chroma"
 )
@@ -80,11 +81,32 @@ def get_topic_context(
         unit
     )
 
+    documents = results["documents"][0]
+    metadata = results["metadata"][0]
+
+    if not documents:
+
+        return {
+            "context": "",
+            "sources": []
+        }
+
+    bm25 = build_bm25(documents)
+
+    ranked = bm25_search(
+        bm25,
+        query,
+        documents,
+        top_k=5
+    )
+
+    context = "\n\n".join(
+        doc for doc, _ in ranked
+    )
+
     return {
-        "context": "\n".join(
-            results["documents"][0]
-        ),
-        "sources": results["metadata"][0]
+        "context": context,
+        "sources": metadata
     }
 
 def get_unit_context(
