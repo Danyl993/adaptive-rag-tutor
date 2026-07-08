@@ -154,7 +154,3 @@ export default function LearnPage() {
 
 }
 
-useEffect(() => {
-  setLesson("");
-  setSelectedTopic("");
-}, [subject, unit]);

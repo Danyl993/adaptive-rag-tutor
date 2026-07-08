@@ -14,12 +14,9 @@ def generate_response(prompt):
 
     try:
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
+       from services.llm_manager import generate
 
-        return response.text
+       return generate(prompt)
 
     except Exception as e:
 
@@ -48,14 +45,13 @@ Study Material:
 
     try:
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
+        from services.llm_manager import generate
+
+        response = generate(prompt)
 
         return [
             topic.strip()
-            for topic in response.text.split("\n")
+            for topic in response.split("\n")
             if topic.strip()
         ]
 
