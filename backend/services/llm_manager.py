@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from google import genai
 from groq import Groq
+from openai import OpenAI
 
 load_dotenv()
 
@@ -19,13 +20,15 @@ GEMINI_KEYS = [
 GEMINI_KEYS = [key for key in GEMINI_KEYS if key]
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 
 def generate(prompt):
 
     last_error = None
 
-    # Try every Gemini key with every Gemini model
+    # ---------------- GEMINI ----------------
+
     for api_key in GEMINI_KEYS:
 
         client = genai.Client(api_key=api_key)
@@ -45,11 +48,12 @@ def generate(prompt):
 
             except Exception as e:
 
-                print(f"{model} failed: {e}")
+                print(f"Gemini {model} failed: {e}")
 
                 last_error = e
 
-    # If all Gemini attempts fail, try Groq
+    # ---------------- GROQ ----------------
+
     if GROQ_API_KEY:
 
         try:
@@ -73,6 +77,37 @@ def generate(prompt):
         except Exception as e:
 
             print(f"Groq failed: {e}")
+
+            last_error = e
+
+    # ---------------- OPENROUTER ----------------
+
+    if OPENROUTER_API_KEY:
+
+        try:
+
+            client = OpenAI(
+                api_key=OPENROUTER_API_KEY,
+                base_url="https://openrouter.ai/api/v1",
+            )
+
+            response = client.chat.completions.create(
+                model="deepseek/deepseek-chat-v3-0324:free",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ]
+            )
+
+            print("Using OpenRouter")
+
+            return response.choices[0].message.content
+
+        except Exception as e:
+
+            print(f"OpenRouter failed: {e}")
 
             last_error = e
 
