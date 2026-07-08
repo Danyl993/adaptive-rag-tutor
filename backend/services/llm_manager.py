@@ -2,6 +2,7 @@ import os
 
 from google import genai
 from dotenv import load_dotenv
+from groq import Groq
 
 load_dotenv()
 
@@ -16,7 +17,7 @@ GEMINI_KEYS = [
 ]
 
 GEMINI_KEYS = [key for key in GEMINI_KEYS if key]
-
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 def generate(prompt):
 
     last_error = None
@@ -43,5 +44,31 @@ def generate(prompt):
                 print(e)
 
                 last_error = e
+
+        if GROQ_API_KEY:
+
+    try:
+
+        client = Groq(api_key=GROQ_API_KEY)
+
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ]
+        )
+
+        print("Using Groq")
+
+        return response.choices[0].message.content
+
+    except Exception as e:
+
+        print(e)
+
+        last_error = e
 
     raise Exception(last_error)
