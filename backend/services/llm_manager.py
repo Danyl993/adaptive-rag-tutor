@@ -1,7 +1,7 @@
 import os
 
-from google import genai
 from dotenv import load_dotenv
+from google import genai
 from groq import Groq
 
 load_dotenv()
@@ -17,11 +17,15 @@ GEMINI_KEYS = [
 ]
 
 GEMINI_KEYS = [key for key in GEMINI_KEYS if key]
+
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+
 def generate(prompt):
 
     last_error = None
 
+    # Try every Gemini key with every Gemini model
     for api_key in GEMINI_KEYS:
 
         client = genai.Client(api_key=api_key)
@@ -35,40 +39,41 @@ def generate(prompt):
                     contents=prompt
                 )
 
-                print(f"Using {model}")
+                print(f"Using Gemini: {model}")
 
                 return response.text
 
             except Exception as e:
 
-                print(e)
+                print(f"{model} failed: {e}")
 
                 last_error = e
 
-        if GROQ_API_KEY:
+    # If all Gemini attempts fail, try Groq
+    if GROQ_API_KEY:
 
-    try:
+        try:
 
-        client = Groq(api_key=GROQ_API_KEY)
+            client = Groq(api_key=GROQ_API_KEY)
 
-        response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
-        )
+            response = client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+                ]
+            )
 
-        print("Using Groq")
+            print("Using Groq")
 
-        return response.choices[0].message.content
+            return response.choices[0].message.content
 
-    except Exception as e:
+        except Exception as e:
 
-        print(e)
+            print(f"Groq failed: {e}")
 
-        last_error = e
+            last_error = e
 
     raise Exception(last_error)
