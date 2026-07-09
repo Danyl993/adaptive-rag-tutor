@@ -23,6 +23,8 @@ export default function ChatPanel({
     "Select a topic from the sidebar to begin learning."
   );
 
+  const [sources, setSources] = useState([]);
+
   async function handleQuestion(question) {
 
     try {
@@ -38,11 +40,11 @@ export default function ChatPanel({
       setMessage(question);
 
       setContext(result.answer);
-
+      setSources(result.source || []);
     } catch (err) {
 
       console.error(err);
-
+      setSources([]);
       setContext(
 `Unable to retrieve study material.
 
@@ -124,6 +126,35 @@ Please check:
           <p className="whitespace-pre-wrap leading-8 text-slate-300">
             {displayText}
           </p>
+
+          {sources.length > 0 && (
+
+    <div className="mt-6 border-t border-slate-800 pt-4">
+
+      <h3 className="mb-3 text-sm font-semibold text-slate-400">
+        References
+      </h3>
+
+      <div className="space-y-2">
+
+        {sources.map((source, index) => (
+
+          <div
+            key={index}
+            className="rounded-lg bg-slate-900 p-3 text-sm text-slate-300"
+          >
+            📄 {source.file} — Page {source.page}
+          </div>
+
+        ))}
+
+      </div>
+
+    </div>
+
+  )}
+
+          
 
         </div>
 

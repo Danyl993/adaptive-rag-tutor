@@ -104,9 +104,20 @@ def get_topic_context(
         doc for doc, _ in ranked
     )
 
+    formatted_sources = []
+
+    for item in metadata:
+
+        formatted_sources.append({
+            "file": item.get("file", "Unknown"),
+            "page": item.get("page", "Unknown"),
+            "subject": item.get("subject", ""),
+            "unit": item.get("unit", "")
+        })
+
     return {
         "context": context,
-        "sources": metadata
+        "sources": formatted_sources
     }
 
 

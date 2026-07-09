@@ -30,13 +30,17 @@ Student Question:
 
 Instructions:
 - If a lesson is provided, treat this as a follow-up question.
-- Do NOT repeat the entire lesson unless the student asks.
-- Answer only what the student asked.
-- Use the study material.
-- Mention source references when possible.
+- Do NOT repeat the lesson unless the student asks.
+- Answer only the student's question.
+- Use ONLY the provided study material.
+- If the answer is not present in the study material, clearly say so.
+- Do not hallucinate or invent information.
+- Cite the supporting source(s) at the end.
 
-At the end add:
-Source: <source reference>
+Format:
+
+References:
+- File: <file_name> | Page: <page_number>
 """
 
     answer = generate_response(prompt)
