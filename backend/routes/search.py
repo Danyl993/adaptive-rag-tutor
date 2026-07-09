@@ -1,7 +1,7 @@
 from typing import Optional
 
 from fastapi import APIRouter
-
+from services.weak_topics import record_topic
 from services.tutor import tutor_response
 from services.history import DB_PATH, save_history
 from services.vector_db import (
@@ -58,6 +58,8 @@ def topic_context(
         topic=topic,
         lesson=lesson
     )
+    if topic:
+        record_topic(topic)
 
     try:
         save_history(

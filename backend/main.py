@@ -13,9 +13,12 @@ from routes.files import router as files_router
 from fastapi.middleware.cors import CORSMiddleware
 from services.history import init_db
 from routes.mcq import router as mcq_router
+from routes.weak_topics import router as weak_topics_router
+from services.weak_topics import init_weak_topics
 
 app = FastAPI()
 init_db()
+init_weak_topics()
 
 @app.get("/")
 def root():
@@ -33,6 +36,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(weak_topics_router)
 app.include_router(upload_router)
 app.include_router(history_router)
 app.include_router(subjects_router)

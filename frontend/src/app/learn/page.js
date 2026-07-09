@@ -13,6 +13,7 @@ import UploadPanel from "@/components/UploadPanel";
 
 import { getLearnData } from "@/services/learn";
 import { getTopicLesson } from "@/services/learnTopic";
+import WeakTopicsPanel from "@/components/WeakTopicsPanel";
 
 export default function LearnPage() {
 
@@ -143,6 +144,8 @@ export default function LearnPage() {
             subject={subject}
             unit={unit}
           />
+
+          <WeakTopicsPanel />
 
         </div>
 

@@ -2,6 +2,20 @@ import sqlite3
 
 DB_PATH = "backend/data/history.db"
 
+def init_weak_topics():
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS weak_topics (
+            topic TEXT PRIMARY KEY,
+            count INTEGER DEFAULT 0
+        )
+    """)
+
+    conn.commit()
+    conn.close()
 
 def record_topic(topic):
 
@@ -15,12 +29,6 @@ def record_topic(topic):
         )
     """)
 
-    cursor.execute("""
-        INSERT INTO weak_topics(topic, count)
-        VALUES(?, 1)
-        ON CONFLICT(topic)
-        DO UPDATE SET count = count + 1
-    """, (topic,))
 
     conn.commit()
     conn.close()
