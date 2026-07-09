@@ -1,22 +1,11 @@
-import os
-
-from google import genai
-from dotenv import load_dotenv
-
-load_dotenv()
-
-client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+from services.llm_manager import generate
 
 
 def generate_response(prompt):
 
     try:
 
-       from services.llm_manager import generate
-
-       return generate(prompt)
+        return generate(prompt)
 
     except Exception as e:
 
@@ -44,8 +33,6 @@ Study Material:
 """
 
     try:
-
-        from services.llm_manager import generate
 
         response = generate(prompt)
 

@@ -109,6 +109,7 @@ def get_topic_context(
         "sources": metadata
     }
 
+
 def get_unit_context(
     subject,
     unit
