@@ -1,12 +1,22 @@
-def calculate_progress(
-    completed_topics,
-    total_topics
-):
+import sqlite3
 
-    if total_topics == 0:
-        return 0
+DB_PATH = "backend/data/history.db"
 
-    return round(
-        (completed_topics / total_topics) * 100,
-        2
-    )
+
+def get_progress():
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT subject,
+               COUNT(*) as questions
+        FROM history
+        GROUP BY subject
+    """)
+
+    rows = cursor.fetchall()
+
+    conn.close()
+
+    return rows
