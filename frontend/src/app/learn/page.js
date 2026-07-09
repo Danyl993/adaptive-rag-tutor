@@ -10,7 +10,7 @@ import UnitSelector from "@/components/UnitSelector";
 import TopicsSidebar from "@/components/TopicsSidebar";
 import ChatPanel from "@/components/ChatPanel";
 import UploadPanel from "@/components/UploadPanel";
-
+import StudyProgressPanel from "@/components/StudyProgressPanel";
 import { getLearnData } from "@/services/learn";
 import { getTopicLesson } from "@/services/learnTopic";
 import WeakTopicsPanel from "@/components/WeakTopicsPanel";
@@ -147,6 +147,8 @@ export default function LearnPage() {
 
           <WeakTopicsPanel />
 
+           <StudyProgressPanel />
+            
         </div>
 
       </div>
