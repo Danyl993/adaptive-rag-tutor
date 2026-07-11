@@ -7,6 +7,7 @@ import NavigationSidebar from "@/components/NavigationSidebar";
 import ModeSelector from "@/components/ModeSelector";
 import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
 
@@ -35,32 +36,13 @@ export default function Home() {
 
       <div className="mx-auto max-w-7xl">
 
-        <div className="mb-8 flex items-center justify-between">
-
-          <div>
-
-            <h1 className="text-5xl font-bold">
-              Adaptive RAG Tutor
-            </h1>
-
-            <p className="mt-2 text-slate-400">
-              Your AI-powered study companion
-            </p>
-
-          </div>
-
-          <button
-            onClick={testBackend}
-            className="rounded-xl bg-blue-600 px-6 py-3 text-white hover:bg-blue-500"
-          >
-            Test Backend
-          </button>
-
-        </div>
-
         <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-          <ModeSelector />
+          <Navbar />
+
+          <div className="mt-6">
+            <ModeSelector />
+          </div>
 
           <div className="mt-5 grid grid-cols-2 gap-4">
 
@@ -97,6 +79,13 @@ export default function Home() {
               <p className="mt-3 text-slate-400">
                 Select a mode from the left sidebar to start studying.
               </p>
+
+              <button
+                onClick={testBackend}
+                className="mt-6 rounded-xl bg-blue-600 px-6 py-3 text-white hover:bg-blue-500"
+              >
+                Test Backend
+              </button>
 
             </div>
 
