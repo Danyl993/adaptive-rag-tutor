@@ -52,9 +52,10 @@ export default function Home() {
           </div>
 
           <div className="col-span-9">
-            <div className="mt-6">
+
+            <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
               <ModeSelector />
-            </div>
+            
 
             <div className="mt-5 grid grid-cols-2 gap-4">
 
@@ -69,6 +70,7 @@ export default function Home() {
               />
 
             </div>
+          </div>
 
 
 
