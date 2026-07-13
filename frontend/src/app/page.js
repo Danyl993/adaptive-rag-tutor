@@ -39,23 +39,7 @@ export default function Home() {
 
           <Navbar />
 
-          <div className="mt-6">
-            <ModeSelector />
-          </div>
-
-          <div className="mt-5 grid grid-cols-2 gap-4">
-
-            <SubjectSelector
-              subject={subject}
-              setSubject={setSubject}
-            />
-
-            <UnitSelector
-              unit={unit}
-              setUnit={setUnit}
-            />
-
-          </div>
+          
 
         </div>
 
@@ -68,6 +52,25 @@ export default function Home() {
           </div>
 
           <div className="col-span-9">
+            <div className="mt-6">
+              <ModeSelector />
+            </div>
+
+            <div className="mt-5 grid grid-cols-2 gap-4">
+
+              <SubjectSelector
+                subject={subject}
+                setSubject={setSubject}
+              />
+
+              <UnitSelector
+                unit={unit}
+                setUnit={setUnit}
+              />
+
+            </div>
+
+
 
             <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-10 min-h-[360px] flex flex-col justify-center">
 
