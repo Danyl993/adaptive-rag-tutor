@@ -23,22 +23,46 @@ export default function Navbar() {
 
   return (
 
-    <header className="mb-8 flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-900/70 px-6 py-4 shadow-lg">
+    <header className="mb-8 flex items-start justify-between rounded-2xl border border-slate-800 bg-slate-900/70 px-6 py-4 shadow-lg">
 
-      <button
-        onClick={handleHomeClick}
-        className="rounded-2xl border border-slate-700 bg-slate-800/70 px-5 py-3 text-left transition-all duration-200 hover:scale-[1.02] hover:border-cyan-400 hover:bg-slate-700 hover:shadow-xl active:scale-95"
-      >
+      {/* Left Section */}
 
-        <h1 className="text-2xl font-bold">
-          Adaptive RAG Tutor
-        </h1>
+      <div className="flex flex-col">
 
-        <p className="text-sm text-slate-400">
-          AI-Powered Study Assistant
-        </p>
+        <button
+          onClick={handleHomeClick}
+          className="rounded-2xl border border-slate-700 bg-slate-800/70 px-5 py-3 text-left transition-all duration-200 hover:scale-[1.02] hover:border-cyan-400 hover:bg-slate-700 hover:shadow-xl active:scale-95"
+        >
 
-      </button>
+          <h1 className="text-2xl font-bold">
+            Adaptive RAG Tutor
+          </h1>
+
+          <p className="text-sm text-slate-400">
+            AI-Powered Study Assistant
+          </p>
+
+        </button>
+
+        <div className="mt-4 flex flex-col gap-2">
+
+          <button
+            className="w-fit rounded-xl border border-cyan-500 bg-cyan-600/20 px-4 py-2 text-sm font-medium text-cyan-300 transition hover:bg-cyan-600 hover:text-white"
+          >
+            Dashboard
+          </button>
+
+          <button
+            className="w-fit rounded-xl border border-slate-600 bg-slate-800 px-4 py-2 text-sm font-medium text-slate-300 transition hover:border-green-500 hover:bg-green-600 hover:text-white"
+          >
+            + New Semester
+          </button>
+
+        </div>
+
+      </div>
+
+      {/* Right Section */}
 
       <div className="flex items-center gap-4">
 

@@ -8,6 +8,7 @@ import ModeSelector from "@/components/ModeSelector";
 import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
 import Navbar from "@/components/Navbar";
+import PageLayout from "@/components/PageLayout";
 
 export default function Home() {
 
@@ -32,9 +33,7 @@ export default function Home() {
 
   return (
 
-    <main className="min-h-screen px-8 py-8">
-
-      <div className="mx-auto max-w-7xl">
+    <PageLayout>
 
         <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
@@ -70,19 +69,20 @@ export default function Home() {
 
           <div className="col-span-9">
 
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-8">
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-10 min-h-[360px] flex flex-col justify-center">
 
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-5xl font-bold">
                 Welcome 👋
               </h2>
 
-              <p className="mt-3 text-slate-400">
-                Select a mode from the left sidebar to start studying.
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-400">
+                Choose a study mode to start learning, revise previous topics,
+                practice MCQs, or ask questions using your uploaded study material.
               </p>
 
               <button
                 onClick={testBackend}
-                className="mt-6 rounded-xl bg-blue-600 px-6 py-3 text-white hover:bg-blue-500"
+                className="mt-8 w-fit rounded-xl bg-cyan-600 px-7 py-3 font-semibold text-white transition hover:bg-cyan-500"
               >
                 Test Backend
               </button>
@@ -93,9 +93,7 @@ export default function Home() {
 
         </div>
 
-      </div>
-
-    </main>
+    </PageLayout>
 
   );
 
