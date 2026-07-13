@@ -34,7 +34,7 @@ export default function NavigationSidebar() {
   ];
 
   return (
-    <aside className="w-full rounded-2xl border border-slate-800 bg-slate-900/70 backdrop-blur-md p-4 shadow-xl">
+    <aside className="flex-1 w-full rounded-2xl border border-slate-800 bg-slate-900/70 backdrop-blur-md p-4 shadow-xl">
 
       <h2 className="mb-6 text-xl font-bold">
         Study Tools
