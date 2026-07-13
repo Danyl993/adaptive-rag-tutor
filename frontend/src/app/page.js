@@ -49,22 +49,26 @@ export default function Home() {
 
             <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-              <h2 className="mb-5 text-xl font-bold">
+              <h2 className="mb-2 text-xl font-bold">
                 Quick Actions
               </h2>
+
+              <p className="mb-5 text-sm text-slate-400">
+                Frequently used shortcuts
+              </p>
 
               <div className="flex flex-col gap-3">
 
                 <button
                   className="rounded-xl border border-cyan-500 bg-cyan-600/20 px-4 py-3 text-left font-medium text-cyan-300 transition hover:bg-cyan-600 hover:text-white"
                 >
-                  Dummy button 1
+                  📊 Dashboard
                 </button>
 
                 <button
                   className="rounded-xl border border-green-500 bg-green-600/20 px-4 py-3 text-left font-medium text-green-300 transition hover:bg-green-600 hover:text-white"
                 >
-                  Dummy button 2
+                  ➕ New Semester
                 </button>
 
               </div>
