@@ -9,11 +9,14 @@ import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
 import Navbar from "@/components/Navbar";
 import PageLayout from "@/components/PageLayout";
+import NewSemesterModal from "@/components/NewSemesterModal";
 
 export default function Home() {
 
   const [subject, setSubject] = useState("OS");
   const [unit, setUnit] = useState("U1");
+
+  const [showNewSemesterModal, setShowNewSemesterModal] = useState(false);
 
   async function testBackend() {
 
@@ -60,6 +63,7 @@ export default function Home() {
             <div className="flex flex-col gap-3">
 
               <button
+                onClick={() => setShowNewSemesterModal(true)}
                 className="rounded-xl border border-green-500 bg-green-600/20 px-4 py-3 text-left font-medium text-green-300 transition hover:bg-green-600 hover:text-white"
               >
                 ➕ New Semester
@@ -126,6 +130,11 @@ export default function Home() {
         </div>
 
       </div>
+
+      <NewSemesterModal
+        isOpen={showNewSemesterModal}
+        onClose={() => setShowNewSemesterModal(false)}
+      />
 
     </PageLayout>
 

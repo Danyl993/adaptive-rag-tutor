@@ -40,7 +40,7 @@ export default function NewSemesterModal({
           <div>
 
             <label className="mb-2 block text-sm font-medium">
-              Number of Subjects (Max 5)
+              Number of Subjects (Max 8)
             </label>
 
             <input
