@@ -35,55 +35,57 @@ export default function Home() {
 
     <PageLayout>
 
-        <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+      <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-          <Navbar />
+        <Navbar />
 
-          
+      </div>
 
-        </div>
+      <div className="grid grid-cols-12 gap-6">
 
-        <div className="grid grid-cols-12 gap-6">
+        {/* Left Column */}
 
-          <div className="col-span-3 flex flex-col gap-6">
+        <div className="col-span-3 flex flex-col gap-6">
 
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-              <h2 className="mb-2 text-xl font-bold">
-                Quick Actions
-              </h2>
+            <h2 className="mb-2 text-xl font-bold">
+              Quick Actions
+            </h2>
 
-              <p className="mb-5 text-sm text-slate-400">
-                Frequently used shortcuts
-              </p>
+            <p className="mb-5 text-sm text-slate-400">
+              Manage your semester
+            </p>
 
-              <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3">
 
-                <button
-                  className="rounded-xl border border-cyan-500 bg-cyan-600/20 px-4 py-3 text-left font-medium text-cyan-300 transition hover:bg-cyan-600 hover:text-white"
-                >
-                  📊 Dashboard
-                </button>
+              <button
+                className="rounded-xl border border-green-500 bg-green-600/20 px-4 py-3 text-left font-medium text-green-300 transition hover:bg-green-600 hover:text-white"
+              >
+                ➕ New Semester
+              </button>
 
-                <button
-                  className="rounded-xl border border-green-500 bg-green-600/20 px-4 py-3 text-left font-medium text-green-300 transition hover:bg-green-600 hover:text-white"
-                >
-                  ➕ New Semester
-                </button>
-
-              </div>
+              <button
+                className="rounded-xl border border-red-500 bg-red-600/20 px-4 py-3 text-left font-medium text-red-300 transition hover:bg-red-600 hover:text-white"
+              >
+                🗑 Reset Semester
+              </button>
 
             </div>
 
-            <NavigationSidebar />
-
           </div>
 
-          <div className="col-span-9">
+          <NavigationSidebar />
 
-            <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
-              <ModeSelector />
-            
+        </div>
+
+        {/* Right Column */}
+
+        <div className="col-span-9">
+
+          <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+
+            <ModeSelector />
 
             <div className="mt-5 grid grid-cols-2 gap-4">
 
@@ -98,33 +100,32 @@ export default function Home() {
               />
 
             </div>
+
           </div>
 
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-10 min-h-[360px] flex flex-col justify-center">
 
+            <h2 className="text-5xl font-bold">
+              Welcome 👋
+            </h2>
 
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-10 min-h-[360px] flex flex-col justify-center">
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-400">
+              Choose a study mode to start learning, revise previous topics,
+              practice MCQs, or ask questions using your uploaded study material.
+            </p>
 
-              <h2 className="text-5xl font-bold">
-                Welcome 👋
-              </h2>
-
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-400">
-                Choose a study mode to start learning, revise previous topics,
-                practice MCQs, or ask questions using your uploaded study material.
-              </p>
-
-              <button
-                onClick={testBackend}
-                className="mt-8 w-fit rounded-xl bg-cyan-600 px-7 py-3 font-semibold text-white transition hover:bg-cyan-500"
-              >
-                Test Backend
-              </button>
-
-            </div>
+            <button
+              onClick={testBackend}
+              className="mt-8 w-fit rounded-xl bg-cyan-600 px-7 py-3 font-semibold text-white transition hover:bg-cyan-500"
+            >
+              Test Backend
+            </button>
 
           </div>
 
         </div>
+
+      </div>
 
     </PageLayout>
 
