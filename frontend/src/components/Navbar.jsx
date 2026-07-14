@@ -44,22 +44,6 @@ export default function Navbar() {
 
         </button>
 
-        <div className="mt-4 flex flex-col gap-2">
-
-          <button
-            className="w-fit rounded-xl border border-cyan-500 bg-cyan-600/20 px-4 py-2 text-sm font-medium text-cyan-300 transition hover:bg-cyan-600 hover:text-white"
-          >
-            Dashboard
-          </button>
-
-          <button
-            className="w-fit rounded-xl border border-slate-600 bg-slate-800 px-4 py-2 text-sm font-medium text-slate-300 transition hover:border-green-500 hover:bg-green-600 hover:text-white"
-          >
-            + New Semester
-          </button>
-
-        </div>
-
       </div>
 
       {/* Right Section */}
