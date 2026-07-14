@@ -1,13 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import SemesterSwitcher from "@/components/SemesterSwitcher";
 
 export default function Navbar({
+  semesters,
   currentSemester,
+  onSelectSemester,
 }) {
 
   const router = useRouter();
   const pathname = usePathname();
+
+  const [showSemesterSwitcher, setShowSemesterSwitcher] = useState(false);
 
   function handleHomeClick() {
 
@@ -20,6 +26,13 @@ export default function Navbar({
       router.push("/");
 
     }
+
+  }
+
+  function handleSemesterSelect(semester) {
+
+    onSelectSemester(semester);
+    setShowSemesterSwitcher(false);
 
   }
 
@@ -50,19 +63,35 @@ export default function Navbar({
 
       {/* Right Section */}
 
-      <div className="flex items-center gap-4">
+      <div className="relative flex items-center gap-4">
 
-        <div className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-2">
+        <button
+          onClick={() => setShowSemesterSwitcher(!showSemesterSwitcher)}
+          className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-2 text-left transition hover:border-cyan-500"
+        >
 
           <p className="text-xs text-slate-400">
             Current Semester
           </p>
 
           <p className="font-semibold">
-            {currentSemester}
+            <span className="flex items-center gap-1 font-semibold">
+              {currentSemester}
+              <span className="text-[10px]">▼</span>
+            </span>
           </p>
 
-        </div>
+        </button>
+
+        {showSemesterSwitcher && (
+
+          <SemesterSwitcher
+            semesters={semesters}
+            currentSemester={currentSemester}
+            onSelectSemester={handleSemesterSelect}
+          />
+
+        )}
 
         <div className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-2">
 

@@ -44,11 +44,13 @@ export default function Home() {
 
     if (!semesters.includes(semester)) {
 
-      setSemesters([
-        ...semesters,
-        semester,
-      ]);
-
+      setSemesters(
+        [...semesters, semester].sort(
+          (a, b) =>
+            Number(a.replace("Semester ", "")) -
+            Number(b.replace("Semester ", ""))
+        )
+      );
     }
 
     setCurrentSemester(semester);
@@ -64,7 +66,9 @@ export default function Home() {
       <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
         <Navbar
+          semesters={semesters}
           currentSemester={currentSemester}
+          onSelectSemester={setCurrentSemester}
         />
 
       </div>
