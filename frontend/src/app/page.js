@@ -16,6 +16,8 @@ export default function Home() {
   const [subject, setSubject] = useState("OS");
   const [unit, setUnit] = useState("U1");
 
+  const [currentSemester, setCurrentSemester] = useState("Semester 5");
+
   const [showNewSemesterModal, setShowNewSemesterModal] = useState(false);
 
   async function testBackend() {
@@ -40,7 +42,7 @@ export default function Home() {
 
       <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-        <Navbar />
+        <Navbar currentSemester={currentSemester} />
 
       </div>
 
@@ -134,6 +136,10 @@ export default function Home() {
       <NewSemesterModal
         isOpen={showNewSemesterModal}
         onClose={() => setShowNewSemesterModal(false)}
+        onCreateSemester={(semester) => {
+          setCurrentSemester(semester);
+          setShowNewSemesterModal(false);
+        }}
       />
 
     </PageLayout>

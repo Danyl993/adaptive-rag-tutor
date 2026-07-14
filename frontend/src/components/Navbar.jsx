@@ -2,7 +2,9 @@
 
 import { useRouter, usePathname } from "next/navigation";
 
-export default function Navbar() {
+export default function Navbar({
+  currentSemester,
+}) {
 
   const router = useRouter();
   const pathname = usePathname();
@@ -57,7 +59,7 @@ export default function Navbar() {
           </p>
 
           <p className="font-semibold">
-            Semester 5
+            {currentSemester}
           </p>
 
         </div>
