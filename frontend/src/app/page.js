@@ -16,6 +16,10 @@ export default function Home() {
   const [subject, setSubject] = useState("OS");
   const [unit, setUnit] = useState("U1");
 
+  const [semesters, setSemesters] = useState([
+    "Semester 5",
+  ]);
+
   const [currentSemester, setCurrentSemester] = useState("Semester 5");
 
   const [showNewSemesterModal, setShowNewSemesterModal] = useState(false);
@@ -36,19 +40,36 @@ export default function Home() {
 
   }
 
+  function handleCreateSemester(semester) {
+
+    if (!semesters.includes(semester)) {
+
+      setSemesters([
+        ...semesters,
+        semester,
+      ]);
+
+    }
+
+    setCurrentSemester(semester);
+
+    setShowNewSemesterModal(false);
+
+  }
+
   return (
 
     <PageLayout>
 
       <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-        <Navbar currentSemester={currentSemester} />
+        <Navbar
+          currentSemester={currentSemester}
+        />
 
       </div>
 
       <div className="grid grid-cols-12 gap-6">
-
-        {/* Left Column */}
 
         <div className="col-span-3 flex flex-col gap-6">
 
@@ -84,8 +105,6 @@ export default function Home() {
           <NavigationSidebar />
 
         </div>
-
-        {/* Right Column */}
 
         <div className="col-span-9">
 
@@ -136,10 +155,7 @@ export default function Home() {
       <NewSemesterModal
         isOpen={showNewSemesterModal}
         onClose={() => setShowNewSemesterModal(false)}
-        onCreateSemester={(semester) => {
-          setCurrentSemester(semester);
-          setShowNewSemesterModal(false);
-        }}
+        onCreateSemester={handleCreateSemester}
       />
 
     </PageLayout>
