@@ -108,11 +108,7 @@ export default function Home() {
                 Welcome 👋
               </h2>
 
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-400">
-                Choose a study mode to start learning, revise previous topics,
-                practice MCQs, or ask questions using your uploaded study material.
-              </p>
-
+              
               <button
                 onClick={testBackend}
                 className="mt-8 w-fit rounded-xl bg-cyan-600 px-7 py-3 font-semibold text-white transition hover:bg-cyan-500"
