@@ -49,7 +49,10 @@ export default function NewSemesterModal({
 
     if (!semesterNumber) return;
 
-    onCreateSemester(`Semester ${semesterNumber}`);
+    onCreateSemester({
+      semester: `Semester ${semesterNumber}`,
+      subjects,
+    });
 
   }
 

@@ -14,11 +14,14 @@ import ResetSemesterModal from "@/components/ResetSemesterModal";
 
 export default function Home() {
 
-  const [subject, setSubject] = useState("OS");
-  const [unit, setUnit] = useState("U1");
+  const [subject, setSubject] = useState("");
+  const [unit, setUnit] = useState("");
 
   const [semesters, setSemesters] = useState([
-    "Semester 5",
+    {
+      semester: "Semester 5",
+      subjects: [],
+    },
   ]);
 
   const [currentSemester, setCurrentSemester] = useState("Semester 5");
@@ -41,24 +44,52 @@ export default function Home() {
 
   }
 
-  function handleCreateSemester(semester) {
+  function handleCreateSemester(data) {
 
-    if (!semesters.includes(semester)) {
+    if (!semesters.some(
+      (item) => item.semester === data.semester
+    )) {
 
-      setSemesters(
-        [...semesters, semester].sort(
-          (a, b) =>
-            Number(a.replace("Semester ", "")) -
-            Number(b.replace("Semester ", ""))
-        )
+      const updatedSemesters = [
+        ...semesters,
+        data,
+      ].sort(
+        (a, b) =>
+          Number(a.semester.replace("Semester ", "")) -
+          Number(b.semester.replace("Semester ", ""))
       );
+
+      setSemesters(updatedSemesters);
+
     }
 
-    setCurrentSemester(semester);
+    setCurrentSemester(data.semester);
+
+    if (data.subjects.length > 0) {
+
+      setSubject(data.subjects[0].name);
+      setUnit("U1");
+
+    }
 
     setShowNewSemesterModal(false);
 
   }
+
+  const selectedSemester = semesters.find(
+    (item) => item.semester === currentSemester
+  );
+
+  const selectedSubject = selectedSemester?.subjects.find(
+    (item) => item.name === subject
+  );
+
+  const availableUnits = selectedSubject
+    ? Array.from(
+        { length: selectedSubject.units },
+        (_, index) => `U${index + 1}`
+      )
+    : [];
 
   return (
 
@@ -121,11 +152,13 @@ export default function Home() {
             <div className="mt-5 grid grid-cols-2 gap-4">
 
               <SubjectSelector
+                subjects={selectedSemester?.subjects || []}
                 subject={subject}
                 setSubject={setSubject}
               />
 
               <UnitSelector
+                units={availableUnits}
                 unit={unit}
                 setUnit={setUnit}
               />
@@ -187,21 +220,25 @@ export default function Home() {
 
   }
 
-  const currentIndex = semesters.indexOf(currentSemester);
+  const currentIndex = semesters.findIndex(
+    (item) => item.semester === currentSemester
+  );
 
   const updatedSemesters = semesters.filter(
-    (semester) => semester !== currentSemester
+    (item) => item.semester !== currentSemester
   );
 
   setSemesters(updatedSemesters);
 
   if (currentIndex < updatedSemesters.length) {
 
-    setCurrentSemester(updatedSemesters[currentIndex]);
+    setCurrentSemester(updatedSemesters[currentIndex].semester);
 
   } else {
 
-    setCurrentSemester(updatedSemesters[currentIndex - 1]);
+    setCurrentSemester(
+      updatedSemesters[currentIndex - 1].semester
+    );
 
   }
 

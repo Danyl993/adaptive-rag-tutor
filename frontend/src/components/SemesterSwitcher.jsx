@@ -16,18 +16,18 @@ export default function SemesterSwitcher({
 
       <div className="flex flex-col gap-2">
 
-        {semesters.map((semester) => (
+        {semesters.map((item) => (
 
           <button
-            key={semester}
-            onClick={() => onSelectSemester(semester)}
+            key={item.semester}
+            onClick={() => onSelectSemester(item.semester)}
             className={`rounded-xl px-4 py-3 text-left transition ${
-              semester === currentSemester
+              item.semester === currentSemester
                 ? "bg-cyan-600 text-white"
                 : "bg-slate-800 text-slate-300 hover:bg-slate-700"
             }`}
           >
-            {semester}
+            {item.semester}
           </button>
 
         ))}
