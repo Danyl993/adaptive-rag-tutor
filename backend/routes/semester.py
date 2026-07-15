@@ -116,3 +116,53 @@ def get_semesters():
     conn.close()
 
     return result
+
+@router.delete("/{semester_name}")
+def delete_semester(semester_name: str):
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT id
+        FROM semesters
+        WHERE semester_name = ?
+        """,
+        (semester_name,),
+    )
+
+    row = cursor.fetchone()
+
+    if row is None:
+
+        conn.close()
+
+        return {
+            "message": "Semester not found"
+        }
+
+    semester_id = row[0]
+
+    cursor.execute(
+        """
+        DELETE FROM subjects
+        WHERE semester_id = ?
+        """,
+        (semester_id,),
+    )
+
+    cursor.execute(
+        """
+        DELETE FROM semesters
+        WHERE id = ?
+        """,
+        (semester_id,),
+    )
+
+    conn.commit()
+    conn.close()
+
+    return {
+        "message": "Semester deleted successfully"
+    }

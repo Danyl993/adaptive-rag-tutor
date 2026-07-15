@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
     getSemesters,
     createSemester,
+    deleteSemester,
   } from "@/services/semester";
 import API from "@/services/api";
 import NavigationSidebar from "@/components/NavigationSidebar";
@@ -20,12 +21,7 @@ export default function Home() {
   const [subject, setSubject] = useState("");
   const [unit, setUnit] = useState("");
 
-  const [semesters, setSemesters] = useState([
-    {
-      semester: "Semester 5",
-      subjects: [],
-    },
-  ]);
+  const [semesters, setSemesters] = useState([]);
 
   const [currentSemester, setCurrentSemester] = useState("Semester 5");
   const [showNewSemesterModal, setShowNewSemesterModal] = useState(false);
@@ -99,10 +95,10 @@ export default function Home() {
   }
 
   const selectedSemester = semesters.find(
-    (item) => item.semester === currentSemester
+    (item) => item.semester_name === currentSemester
   );
 
-  const selectedSubject = selectedSemester?.subjects.find(
+  const selectedSubject = selectedSemester?.subjects?.find(
     (item) => item.name === subject
   );
 
@@ -236,42 +232,31 @@ export default function Home() {
 
   );
 
-  function handleResetSemester() {
+  async function handleResetSemester() {
 
-  if (semesters.length === 1) {
+    if (semesters.length === 1) {
 
-    alert("At least one semester must exist.");
+      alert("At least one semester must exist.");
+      setShowResetSemesterModal(false);
+      return;
 
-    setShowResetSemesterModal(false);
+    }
 
-    return;
+    try {
 
-  }
+      await deleteSemester(currentSemester);
 
-  const currentIndex = semesters.findIndex(
-    (item) => item.semester === currentSemester
-  );
+      await loadSemesters();
 
-  const updatedSemesters = semesters.filter(
-    (item) => item.semester !== currentSemester
-  );
+      setShowResetSemesterModal(false);
 
-  setSemesters(updatedSemesters);
+    } catch (error) {
 
-  if (currentIndex < updatedSemesters.length) {
+      console.error(error);
+      alert("Failed to delete semester.");
 
-    setCurrentSemester(updatedSemesters[currentIndex].semester);
-
-  } else {
-
-    setCurrentSemester(
-      updatedSemesters[currentIndex - 1].semester
-    );
+    }
 
   }
-
-  setShowResetSemesterModal(false);
-
-}
 
 }
