@@ -10,6 +10,7 @@ import UnitSelector from "@/components/UnitSelector";
 import Navbar from "@/components/Navbar";
 import PageLayout from "@/components/PageLayout";
 import NewSemesterModal from "@/components/NewSemesterModal";
+import ResetSemesterModal from "@/components/ResetSemesterModal";
 
 export default function Home() {
 
@@ -21,8 +22,8 @@ export default function Home() {
   ]);
 
   const [currentSemester, setCurrentSemester] = useState("Semester 5");
-
   const [showNewSemesterModal, setShowNewSemesterModal] = useState(false);
+  const [showResetSemesterModal, setShowResetSemesterModal] = useState(false);
 
   async function testBackend() {
 
@@ -97,6 +98,7 @@ export default function Home() {
               </button>
 
               <button
+                onClick={() => setShowResetSemesterModal(true)}
                 className="rounded-xl border border-red-500 bg-red-600/20 px-4 py-3 text-left font-medium text-red-300 transition hover:bg-red-600 hover:text-white"
               >
                 🗑 Reset Semester
@@ -162,8 +164,49 @@ export default function Home() {
         onCreateSemester={handleCreateSemester}
       />
 
+      <ResetSemesterModal
+        isOpen={showResetSemesterModal}
+        semester={currentSemester}
+        onCancel={() => setShowResetSemesterModal(false)}
+        onConfirm={handleResetSemester}
+      />
+
     </PageLayout>
 
   );
+
+  function handleResetSemester() {
+
+  if (semesters.length === 1) {
+
+    alert("At least one semester must exist.");
+
+    setShowResetSemesterModal(false);
+
+    return;
+
+  }
+
+  const currentIndex = semesters.indexOf(currentSemester);
+
+  const updatedSemesters = semesters.filter(
+    (semester) => semester !== currentSemester
+  );
+
+  setSemesters(updatedSemesters);
+
+  if (currentIndex < updatedSemesters.length) {
+
+    setCurrentSemester(updatedSemesters[currentIndex]);
+
+  } else {
+
+    setCurrentSemester(updatedSemesters[currentIndex - 1]);
+
+  }
+
+  setShowResetSemesterModal(false);
+
+}
 
 }
