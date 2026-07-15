@@ -9,10 +9,9 @@ def init_db():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    cursor.execute("DROP TABLE IF EXISTS history")
 
     cursor.execute("""
-        CREATE TABLE history (
+        CREATE TABLE IF NOT EXISTS history (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             question TEXT NOT NULL,
             answer TEXT NOT NULL,
@@ -20,6 +19,25 @@ def init_db():
             unit TEXT,
             mode TEXT,
             created_at TEXT
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS semesters (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            semester_name TEXT UNIQUE NOT NULL,
+            created_at TEXT
+        )
+    """)
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS subjects (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            semester_id INTEGER,
+            subject_name TEXT,
+            units INTEGER,
+            FOREIGN KEY (semester_id)
+                REFERENCES semesters(id)
         )
     """)
 
