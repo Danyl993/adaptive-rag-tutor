@@ -16,6 +16,7 @@ from routes.mcq import router as mcq_router
 from routes.weak_topics import router as weak_topics_router
 from services.weak_topics import init_weak_topics
 from routes.progress import router as progress_router
+from routes.semester import router as semester_router
 
 app = FastAPI()
 init_db()
@@ -51,3 +52,4 @@ app.include_router(search_router)
 app.include_router(files_router)
 app.include_router(mcq_router)
 app.include_router(progress_router)
+app.include_router(semester_router)
