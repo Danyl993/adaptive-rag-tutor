@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { getSemesters } from "@/services/semester";
 import API from "@/services/api";
 import NavigationSidebar from "@/components/NavigationSidebar";
 import ModeSelector from "@/components/ModeSelector";
@@ -43,6 +43,29 @@ export default function Home() {
     }
 
   }
+
+  async function loadSemesters() {
+
+    try {
+
+      const data = await getSemesters();
+
+      if (data.length > 0) {
+
+        setSemesters(data);
+
+        setCurrentSemester(data[0].semester);
+
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  }
+
 
   function handleCreateSemester(data) {
 
@@ -90,6 +113,12 @@ export default function Home() {
         (_, index) => `U${index + 1}`
       )
     : [];
+  
+  useEffect(() => {
+
+    loadSemesters();
+
+  }, []);
 
   return (
 

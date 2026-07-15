@@ -74,11 +74,45 @@ def get_semesters():
     cursor.execute("""
         SELECT *
         FROM semesters
-        ORDER BY semester_name
+        ORDER BY CAST(
+            REPLACE(semester_name, 'Semester ', '')
+            AS INTEGER
+        )
     """)
 
-    semesters = [dict(row) for row in cursor.fetchall()]
+    semester_rows = cursor.fetchall()
+
+    result = []
+
+    for semester in semester_rows:
+
+        cursor.execute(
+            """
+            SELECT subject_name, units
+            FROM subjects
+            WHERE semester_id = ?
+            """,
+            (semester["id"],),
+        )
+
+        subjects = []
+
+        for subject in cursor.fetchall():
+
+            subjects.append(
+                {
+                    "name": subject["subject_name"],
+                    "units": subject["units"],
+                }
+            )
+
+        result.append(
+            {
+                "semester": semester["semester_name"],
+                "subjects": subjects,
+            }
+        )
 
     conn.close()
 
-    return semesters
+    return result
