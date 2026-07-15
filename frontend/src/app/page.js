@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getSemesters } from "@/services/semester";
+import {
+    getSemesters,
+    createSemester,
+  } from "@/services/semester";
 import API from "@/services/api";
 import NavigationSidebar from "@/components/NavigationSidebar";
 import ModeSelector from "@/components/ModeSelector";
@@ -67,35 +70,31 @@ export default function Home() {
   }
 
 
-  function handleCreateSemester(data) {
+  async function handleCreateSemester(data) {
 
-    if (!semesters.some(
-      (item) => item.semester === data.semester
-    )) {
+    try {
 
-      const updatedSemesters = [
-        ...semesters,
-        data,
-      ].sort(
-        (a, b) =>
-          Number(a.semester.replace("Semester ", "")) -
-          Number(b.semester.replace("Semester ", ""))
-      );
+      await createSemester(data);
 
-      setSemesters(updatedSemesters);
+      await loadSemesters();
 
-    }
+      setCurrentSemester(data.semester);
 
-    setCurrentSemester(data.semester);
+      if (data.subjects.length > 0) {
 
-    if (data.subjects.length > 0) {
+        setSubject(data.subjects[0].name);
+        setUnit("U1");
 
-      setSubject(data.subjects[0].name);
-      setUnit("U1");
+      }
+
+      setShowNewSemesterModal(false);
+
+    } catch (error) {
+
+      console.error(error);
+      alert("Failed to create semester.");
 
     }
-
-    setShowNewSemesterModal(false);
 
   }
 
