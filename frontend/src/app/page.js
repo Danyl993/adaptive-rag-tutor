@@ -24,6 +24,14 @@ export default function Home() {
   const [semesters, setSemesters] = useState([]);
 
   const [currentSemester, setCurrentSemester] = useState("Semester 5");
+  useEffect(() => {
+
+    localStorage.setItem(
+      "currentSemester",
+      currentSemester
+    );
+
+  }, [currentSemester]);
   const [showNewSemesterModal, setShowNewSemesterModal] = useState(false);
   const [showResetSemesterModal, setShowResetSemesterModal] = useState(false);
 
@@ -95,8 +103,27 @@ export default function Home() {
   }
 
   const selectedSemester = semesters.find(
-    (item) => item.semester_name === currentSemester
+    (item) => item.semester === currentSemester
   );
+
+  useEffect(() => {
+
+    if (
+      selectedSemester &&
+      selectedSemester.subjects.length > 0
+    ) {
+
+      setSubject(selectedSemester.subjects[0].name);
+      setUnit("U1");
+
+    } else {
+
+      setSubject("");
+      setUnit("");
+
+    }
+
+  }, [currentSemester, semesters]);
 
   const selectedSubject = selectedSemester?.subjects?.find(
     (item) => item.name === subject
@@ -112,6 +139,15 @@ export default function Home() {
   useEffect(() => {
 
     loadSemesters();
+
+    const savedSemester =
+      localStorage.getItem("currentSemester");
+
+    if (savedSemester) {
+
+      setCurrentSemester(savedSemester);
+
+    }
 
   }, []);
 
