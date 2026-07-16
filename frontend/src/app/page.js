@@ -23,7 +23,7 @@ export default function Home() {
 
   const [semesters, setSemesters] = useState([]);
 
-  const [currentSemester, setCurrentSemester] = useState("Semester 5");
+  const [currentSemester, setCurrentSemester] = useState("");
   useEffect(() => {
 
     localStorage.setItem(
@@ -61,7 +61,6 @@ export default function Home() {
 
         setSemesters(data);
 
-        setCurrentSemester(data[0].semester);
 
       }
 
@@ -139,15 +138,6 @@ export default function Home() {
   useEffect(() => {
 
     loadSemesters();
-
-    const savedSemester =
-      localStorage.getItem("currentSemester");
-
-    if (savedSemester) {
-
-      setCurrentSemester(savedSemester);
-
-    }
 
   }, []);
 
