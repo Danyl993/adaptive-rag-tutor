@@ -275,11 +275,7 @@ export default function LearnPage() {
 
           </div>
 
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
-
-            <StudyProgressPanel />
-
-          </div>
+          
 
         </div>
       </div>
