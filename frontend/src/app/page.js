@@ -52,24 +52,17 @@ export default function Home() {
   }
 
   async function loadSemesters() {
-
     try {
-
       const data = await getSemesters();
+      console.log(data);
+      setSemesters(data);
 
       if (data.length > 0) {
-
-        setSemesters(data);
-
-
+        setCurrentSemester(data[0].semester);
       }
-
-    } catch (error) {
-
-      console.error(error);
-
+    } catch (err) {
+      console.log(err);
     }
-
   }
 
 

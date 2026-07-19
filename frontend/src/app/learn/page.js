@@ -139,11 +139,15 @@ export default function LearnPage() {
 
     <PageLayout>
 
-      <Navbar
-        semesters={semesters}
-        currentSemester={currentSemester}
-        onSelectSemester={setCurrentSemester}
-      />
+      <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+
+        <Navbar
+          semesters={semesters}
+          currentSemester={currentSemester}
+          onSelectSemester={setCurrentSemester}
+        />
+
+      </div>
 
       <div className="grid grid-cols-12 gap-6 mb-6">
 
@@ -205,83 +209,43 @@ export default function LearnPage() {
 
       </div>
 
-      <div className="grid grid-cols-12 gap-6">
-
-        {/* Study Tools */}
-
-        <div className="col-span-2">
-
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 h-full">
-
-            <NavigationSidebar />
-
-          </div>
-
-        </div>
-
-        {/* Topics */}
+      <div className="grid grid-cols-9 gap-6">
 
         <div className="col-span-3">
-
           <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 h-full">
-
             <TopicsSidebar
               subject={subject}
               unit={unit}
               onTopicSelect={handleTopicSelect}
             />
-
           </div>
-
         </div>
 
-        {/* Chat */}
-
-        <div className="col-span-5">
-
+        <div className="col-span-4">
           <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 h-full">
-
             <ChatPanel
               subject={subject}
               unit={unit}
-              lesson={
-                loadingLesson
-                  ? "Generating lesson..."
-                  : lesson
-              }
+              lesson={loadingLesson ? "Generating lesson..." : lesson}
               selectedTopic={selectedTopic}
             />
-
           </div>
-
         </div>
-
-        {/* Upload */}
 
         <div className="col-span-2 flex flex-col gap-4">
-
           <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
-
-            <UploadPanel
-              subject={subject}
-              unit={unit}
-            />
-
+            <UploadPanel subject={subject} unit={unit} />
           </div>
 
           <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
-
             <WeakTopicsPanel />
-
           </div>
 
           <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
-
             <StudyProgressPanel />
-
           </div>
-
         </div>
+
       </div>
 
     </PageLayout>
