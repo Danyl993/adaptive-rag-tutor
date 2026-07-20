@@ -212,7 +212,13 @@ export default function LearnPage() {
       <div className="grid grid-cols-12 gap-6">
 
         <div className="col-span-3">
-          
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 h-full">
+            <TopicsSidebar
+              subject={subject}
+              unit={unit}
+              onTopicSelect={handleTopicSelect}
+            />
+          </div>
         </div>
 
         <div className="col-span-4">
