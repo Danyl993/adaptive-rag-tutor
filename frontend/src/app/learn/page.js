@@ -195,11 +195,7 @@ export default function LearnPage() {
                 setSubject={setSubject}
               />
 
-              <UnitSelector
-                units={availableUnits}
-                unit={unit}
-                setUnit={setUnit}
-              />
+              
 
             </div>
 
