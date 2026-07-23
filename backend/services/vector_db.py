@@ -138,9 +138,9 @@ def get_unit_context(
 
     )
 
-    documents = results.get(
-        "documents",
-        []
-    )
+    documents = results.get("documents", [])
 
-    return "\n\n".join(documents)
+    if not documents:
+        return ""
+
+    return "\n\n".join(documents[:20])
