@@ -68,5 +68,6 @@ async def upload_pdf(
     return {
         "filename": file.filename,
         "pages": len(pages),
-        "chunks": total_chunks
+        "chunks": total_chunks,
+        "metadata": parsed["metadata"]
     }
