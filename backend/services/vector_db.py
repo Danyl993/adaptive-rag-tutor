@@ -54,7 +54,7 @@ def search_by_subject_unit(
 
     results = collection.query(
         query_texts=[query],
-        n_results=5,
+        n_results=20,
 
         where={
             "$and": [
