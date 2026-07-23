@@ -3,7 +3,6 @@ import tempfile
 import shutil
 
 from services.vector_db import add_chunks
-from services.rag import extract_pdf_text
 from services.chunker import chunk_text
 from services.document_parser import parse_document
 
