@@ -51,9 +51,7 @@ async def upload_pdf(
             }
         ]
 
-    for page_data in pages:
-        
-        total_chunks = 0
+    total_chunks = 0
 
     for page_data in pages:
 
