@@ -48,9 +48,11 @@ def learn_topic(
     )
 
     return {
+        "success": True,
         "topic": topic,
         "subject": subject,
         "unit": unit,
+        "context_length": len(context),
         **lesson
     }
 
