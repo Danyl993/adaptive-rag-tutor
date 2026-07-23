@@ -72,9 +72,14 @@ Instructions:
 - Explain in simple words.
 - Assume the student is learning this topic for the first time.
 - Do not explain unrelated topics.
-- Use headings.
-- Give one small example if possible.
-- End with 2 quick recap points.
+- Start with a short overview of the topic.
+- Break the explanation into clear headings.
+- Explain one concept at a time.
+- Give one small real-world example where possible.
+- Mention common mistakes or misconceptions if relevant.
+- End with:
+  1. Two quick recap points.
+  2. Two short self-check questions.
 """
 
     lesson = generate_response(prompt)
