@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from typing import Optional
 
-from services.vector_db import get_unit_context
+from services.vector_db import get_topic_context
 from services.tutor import (
     teach_topic,
     explain_simpler,
@@ -31,10 +31,11 @@ def learn_topic(
     topic: str
 ):
 
-    context = get_unit_context(
+    context = get_topic_context(
+        topic,
         subject,
         unit
-    )
+    )["context"]
 
     lesson = teach_topic(
         topic=topic,
