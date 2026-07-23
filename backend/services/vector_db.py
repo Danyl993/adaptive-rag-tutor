@@ -94,11 +94,13 @@ def get_topic_context(
 
     bm25 = build_bm25(documents)
 
+    top_k = min(5, len(documents))
+
     ranked = bm25_search(
         bm25,
         query,
         documents,
-        top_k=5
+        top_k=top_k
     )
 
     top_documents = [doc for doc, _ in ranked]
