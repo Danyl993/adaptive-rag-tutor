@@ -72,7 +72,12 @@ def parse_document(file_path):
 
         record_document()
 
-        return result
+        metadata = extract_metadata(file_path)
+
+        return {
+            "content": result,
+            "metadata": metadata
+        }
 
     except Exception as e:
 

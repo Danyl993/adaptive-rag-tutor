@@ -1,7 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, Form
 import tempfile
 import shutil
-
 from services.vector_db import add_chunks
 from services.chunker import chunk_text
 from services.document_parser import parse_document
@@ -28,15 +27,13 @@ async def upload_pdf(
 
         temp_path = temp_file.name
 
-    result = parse_document(
-    temp_path
-    )
-    if isinstance(result, dict):
+    parsed = parse_document(temp_path)
 
-        if result.get("success") is False:
-
-            return result
+    if parsed.get("success") is False:
+        return parsed
     
+    result = parsed["content"]
+
     if isinstance(result, list):
 
         pages = result
