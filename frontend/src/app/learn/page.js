@@ -187,7 +187,29 @@ export default function LearnPage() {
 
           <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="mb-10 flex flex-wrap gap-8">
+              <button className="rounded-xl border border-green-500 bg-green-600/20 px-7 py-3 text-lg font-semibold text-green-300">
+                Learn
+              </button>
+
+              <button className="rounded-xl border border-slate-700 bg-slate-800 px-7 py-3 text-lg font-semibold text-slate-300">
+                Exam
+              </button>
+
+              <button className="rounded-xl border border-slate-700 bg-slate-800 px-7 py-3 text-lg font-semibold text-slate-300">
+                Revision
+              </button>
+
+              <button className="rounded-xl border border-slate-700 bg-slate-800 px-7 py-3 text-lg font-semibold text-slate-300">
+                MCQ
+              </button>
+
+              <button className="rounded-xl border border-slate-700 bg-slate-800 px-7 py-3 text-lg font-semibold text-slate-300">
+                Q&A
+              </button>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-8">
 
               <SubjectSelector
                 subjects={selectedSemester?.subjects || []}

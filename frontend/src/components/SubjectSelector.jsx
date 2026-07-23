@@ -11,7 +11,7 @@ export default function SubjectSelector({
     <select
       value={subject}
       onChange={(e) => setSubject(e.target.value)}
-      className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-white focus:border-blue-500 focus:outline-none"
+      className="w-full rounded-xl border border-slate-700 bg-slate-900 px-5 py-4 text-lg font-medium text-white focus:border-blue-500 focus:outline-none"
     >
 
       {subjects.length === 0 ? (
