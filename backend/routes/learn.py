@@ -47,7 +47,12 @@ def learn_topic(
         context=context
     )
 
-    return lesson
+    return {
+        "topic": topic,
+        "subject": subject,
+        "unit": unit,
+        **lesson
+    }
 
 @router.post("/learn/explain-simpler")
 def simplify_lesson(
