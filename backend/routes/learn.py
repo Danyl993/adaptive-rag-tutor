@@ -37,6 +37,11 @@ def learn_topic(
         unit
     )["context"]
 
+    if not context:
+        return {
+            "error": f"No study material found for topic '{topic}'"
+        }
+
     lesson = teach_topic(
         topic=topic,
         context=context
