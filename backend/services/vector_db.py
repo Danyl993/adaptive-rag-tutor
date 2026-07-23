@@ -31,7 +31,8 @@ def add_chunks(
                 "subject": subject,
                 "unit": unit,
                 "file": file_name,
-                "page": page
+                "page": page,
+                "chunk": i
             }]
         )
 
