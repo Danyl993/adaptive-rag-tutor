@@ -100,9 +100,9 @@ def get_topic_context(
         top_k=5
     )
 
-    context = "\n\n".join(
-        doc for doc, _ in ranked
-    )
+    top_documents = [doc for doc, _ in ranked]
+
+    context = "\n\n".join(top_documents)
 
     formatted_sources = []
 
