@@ -221,7 +221,7 @@ export default function LearnPage() {
           </div>
         </div>
 
-        <div className="col-span-4">
+        <div className="col-span-6">
           <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 h-full">
             <ChatPanel
               subject={subject}
@@ -232,7 +232,7 @@ export default function LearnPage() {
           </div>
         </div>
 
-        <div className="col-span-2 flex flex-col gap-4">
+        <div className="col-span-3 flex flex-col gap-4">
           <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
             <UploadPanel subject={subject} unit={unit} />
           </div>
