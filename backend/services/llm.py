@@ -22,11 +22,14 @@ You are an academic tutor.
 From the study material below, extract ONLY the main learning topics.
 
 Rules:
-- Return only the topic names.
+- Return only the main learning topics.
 - One topic per line.
-- No numbering.
+- No numbering or bullet points.
 - No explanations.
-- Remove duplicates.
+- Remove duplicate topics.
+- Keep the original terminology from the study material.
+- Ignore section numbers like "1.1", "2.3", etc.
+- Ignore titles such as "Introduction", "Summary", "Objectives", "References".
 
 Study Material:
 {context}
