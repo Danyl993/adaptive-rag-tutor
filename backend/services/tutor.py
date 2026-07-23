@@ -55,6 +55,10 @@ def teach_topic(
     context,
     style="simple"
 ):
+    if not context.strip():
+        return {
+            "lesson": "No study material was found for this topic. Please upload notes covering this topic first."
+        }
 
     prompt = f"""
 You are an excellent university professor.
