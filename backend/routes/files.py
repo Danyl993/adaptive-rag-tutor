@@ -1,21 +1,22 @@
 from fastapi import APIRouter
+
 import os
 
 router = APIRouter()
 
 
 @router.get("/files")
-def files():
+def files(subject: str, unit: str):
 
-    base = "backend/data/uploads"
+    folder = os.path.join(
+        "backend",
+        "data",
+        "uploads",
+        subject,
+        unit
+    )
 
-    if not os.path.exists(base):
+    if not os.path.exists(folder):
         return []
 
-    results = []
-
-    for root, dirs, files in os.walk(base):
-        for file in files:
-            results.append(file)
-
-    return results
+    return os.listdir(folder)
