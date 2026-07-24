@@ -119,6 +119,51 @@ End the lesson with:
         "lesson": lesson
     }
 
+def generate_exam_revision(subject, unit, context):
+
+    prompt = f"""
+You are an experienced university professor helping a student prepare for exams.
+
+Subject:
+{subject}
+
+Unit:
+{unit}
+
+Study Material:
+{context}
+
+Instructions:
+
+Use ONLY the study material.
+
+Generate concise exam revision notes.
+
+Structure:
+
+# Exam Revision
+
+## Important Concepts
+
+## Definitions
+
+## Frequently Asked Questions
+
+## Common Mistakes
+
+## Last Minute Revision Tips
+
+Keep everything concise and exam-oriented.
+
+Do not invent information.
+"""
+
+    revision = generate_response(prompt)
+
+    return {
+        "revision": revision
+    }
+
 def explain_simpler(lesson):
 
     prompt = f"""

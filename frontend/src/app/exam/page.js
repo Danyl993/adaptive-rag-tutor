@@ -84,13 +84,7 @@ export default function ExamPage() {
         unit
       );
 
-      setResult(
-        JSON.stringify(
-          data,
-          null,
-          2
-        )
-      );
+      setResult(data.revision);
 
     } catch (err) {
 

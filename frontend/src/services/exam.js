@@ -2,14 +2,14 @@ import API from "./api";
 
 export async function getExamData(
   subject,
-  units
+  unit
 ) {
   const res = await API.get(
     "/exam",
     {
       params: {
         subject,
-        units,
+        unit,
       },
     }
   );
