@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Upload } from "lucide-react";
 import { uploadFile } from "@/services/upload";
+import { useEffect } from "react";
+import { getFiles } from "@/services/files";
 
 export default function UploadPanel({
   subject,
@@ -12,6 +14,24 @@ export default function UploadPanel({
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  useEffect(() => {
+
+  if (!subject || !unit) return;
+
+  async function loadFiles() {
+    try {
+      const files = await getFiles(subject, unit);
+      setUploadedFiles(files);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  loadFiles();
+
+}, [subject, unit]);
 
   function handleFileChange(e) {
 
@@ -78,6 +98,26 @@ export default function UploadPanel({
         </h2>
 
       </div>
+
+      {uploadedFiles.length > 0 && (
+
+        <div className="mb-5 rounded-xl bg-slate-800 p-4">
+
+          <p className="font-semibold text-emerald-400">
+            Study material already uploaded
+          </p>
+
+          {uploadedFiles.map((file) => (
+
+            <p key={file} className="mt-2 text-slate-300">
+              📄 {file}
+            </p>
+
+          ))}
+
+        </div>
+
+      )}
 
       <label className="block">
       <input
