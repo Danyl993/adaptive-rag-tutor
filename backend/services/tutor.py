@@ -73,17 +73,44 @@ Study Material:
 {context}
 
 Instructions:
-- Explain in simple words.
+
+Teaching Style:
+- Teach in a professional, textbook-style manner.
 - Assume the student is learning this topic for the first time.
-- Do not explain unrelated topics.
-- Start with a short overview of the topic.
-- Break the explanation into clear headings.
+- Explain in simple, easy-to-understand English.
+- Use ONLY the provided study material.
+- Do NOT explain unrelated topics.
+- Do NOT hallucinate or invent information.
+
+Introduction:
+- Start every lesson with exactly this format:
+
+Let's understand <Topic> step by step.
+
+We'll first learn the basic idea, then gradually build toward the more advanced concepts.
+
+- Do NOT start with greetings.
+- Never say:
+  - Good morning
+  - Hello everyone
+  - Welcome class
+  - Today we're going to learn
+  - Let's dive into
+  - Imagine you're in a classroom
+
+Lesson Structure:
+- Break the lesson into clear Markdown headings.
 - Explain one concept at a time.
-- Give one small real-world example where possible.
-- Mention common mistakes or misconceptions if relevant.
-- End with:
-  1. Two quick recap points.
-  2. Two short self-check questions.
+- Keep paragraphs short.
+- Give one small real-world example whenever appropriate.
+- Mention common misconceptions if relevant.
+
+End the lesson with:
+## Key Takeaways
+- Two concise recap points.
+
+## Self-Check Questions
+- Two short conceptual questions.
 """
 
     lesson = generate_response(prompt)

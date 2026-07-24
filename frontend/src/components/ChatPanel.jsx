@@ -7,6 +7,7 @@ import ChatInput from "./ChatInput";
 import { explainBetter } from "@/services/explainBetter";
 import { getContext } from "@/services/search";
 import { explainSimpler } from "@/services/explain";
+import ReactMarkdown from "react-markdown";
 
 export default function ChatPanel({
   subject,
@@ -123,9 +124,64 @@ Please check:
 
         <div className="mt-5">
 
-          <p className="whitespace-pre-wrap leading-8 text-slate-300">
-            {displayText}
-          </p>
+          <div className="leading-8 text-slate-300">
+            <ReactMarkdown
+              components={{
+                h1: ({ children }) => (
+                  <h1 className="text-4xl font-bold text-white mb-6 mt-8 border-b border-slate-700 pb-2">
+                    {children}
+                  </h1>
+                ),
+                h2: ({ children }) => (
+                  <h2 className="text-3xl font-bold text-cyan-400 mt-8 mb-4">
+                    {children}
+                  </h2>
+                ),
+                h3: ({ children }) => (
+                  <h3 className="text-2xl font-semibold text-blue-300 mt-6 mb-3">
+                    {children}
+                  </h3>
+                ),
+                p: ({ children }) => (
+                  <p className="mb-4 text-base text-slate-300 leading-8">
+                    {children}
+                  </p>
+                ),
+                strong: ({ children }) => (
+                  <strong className="font-bold text-white">
+                    {children}
+                  </strong>
+                ),
+                ul: ({ children }) => (
+                  <ul className="list-disc ml-6 space-y-2 mb-4">
+                    {children}
+                  </ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="list-decimal ml-6 space-y-2 mb-4">
+                    {children}
+                  </ol>
+                ),
+                li: ({ children }) => (
+                  <li className="text-slate-300">
+                    {children}
+                  </li>
+                ),
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-4 border-cyan-500 pl-4 italic text-slate-400 my-4">
+                    {children}
+                  </blockquote>
+                ),
+                code: ({ children }) => (
+                  <code className="bg-slate-800 px-1 py-0.5 rounded text-green-400">
+                    {children}
+                  </code>
+                ),
+              }}
+            >
+              {displayText}
+            </ReactMarkdown>
+          </div>
 
           {sources.length > 0 && (
 
