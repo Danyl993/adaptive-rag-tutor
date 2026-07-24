@@ -28,6 +28,26 @@ async def upload_pdf(
 
         temp_path = temp_file.name
 
+    upload_folder = os.path.join(
+        "backend",
+        "data",
+        "uploads",
+        subject,
+        unit
+    )
+
+    os.makedirs(upload_folder, exist_ok=True)
+
+    saved_file_path = os.path.join(
+        upload_folder,
+        file.filename
+    )
+
+    shutil.copy(
+        temp_path,
+        saved_file_path
+    )
+
     try :
         parsed = parse_document(temp_path)
 
