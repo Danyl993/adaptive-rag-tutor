@@ -7,14 +7,71 @@ import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
 import Navbar from "@/components/Navbar";
 import { getExamData } from "@/services/exam";
+import { useEffect } from "react";
+import { getSemesters } from "@/services/semester";
 
 export default function ExamPage() {
 
   const [subject, setSubject] = useState("OS");
   const [unit, setUnit] = useState("U1");
+  const [semesters, setSemesters] = useState([]);
+  const [currentSemester, setCurrentSemester] = useState("");
 
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+
+    async function loadSemesters() {
+
+      try {
+
+        const data = await getSemesters();
+
+        setSemesters(data);
+
+        if (data.length > 0) {
+          setCurrentSemester(data[0].semester);
+        }
+
+      } catch (err) {
+
+        console.error(err);
+
+      }
+
+    }
+
+    loadSemesters();
+
+  }, []);
+
+  const selectedSemester = semesters.find(
+    (item) => item.semester === currentSemester
+  );
+
+  const selectedSubject = selectedSemester?.subjects?.find(
+    (item) => item.name === subject
+  );
+
+  const availableUnits = selectedSubject
+    ? Array.from(
+        { length: selectedSubject.units },
+        (_, index) => `U${index + 1}`
+      )
+    : [];
+
+  useEffect(() => {
+
+    if (
+      selectedSemester &&
+      selectedSemester.subjects.length > 0
+    ) {
+      setSubject(selectedSemester.subjects[0].name);
+      setUnit("U1");
+    }
+
+  }, [currentSemester, semesters]);
 
   async function startExamMode() {
 
@@ -59,11 +116,16 @@ Please make sure:
   return (
 
     <PageLayout>
-      <Navbar />
+      <Navbar
+        semesters={semesters}
+        currentSemester={currentSemester}
+        onSelectSemester={setCurrentSemester}
+      />
 
       <div className="mt-6">
 
         <SubjectSelector
+          subjects={selectedSemester?.subjects || []}
           subject={subject}
           setSubject={setSubject}
         />
@@ -73,6 +135,7 @@ Please make sure:
       <div className="mt-4">
 
         <UnitSelector
+          units={availableUnits}
           unit={unit}
           setUnit={setUnit}
         />
