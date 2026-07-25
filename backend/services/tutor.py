@@ -152,6 +152,7 @@ def generate_exam_revision(subject, unit, context, exam_type):
     ## Last Minute Revision Tips
 
     Use ONLY the study material.
+    
     """
 
     elif exam_type == "2marks":
