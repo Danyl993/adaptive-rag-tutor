@@ -17,7 +17,7 @@ import WeakTopicsPanel from "@/components/WeakTopicsPanel";
 import {
     getSemesters,
   } from "@/services/semester";
-import { useRouter } from "next/navigation";
+import LargeModeSelector from "@/components/LargeModeSelector";
 
 export default function LearnPage() {
 
@@ -29,7 +29,7 @@ export default function LearnPage() {
   const [lesson, setLesson] = useState("");
   const [loadingLesson, setLoadingLesson] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState("");
-  const router = useRouter();
+  
 
   useEffect(() => {
 
@@ -190,44 +190,7 @@ export default function LearnPage() {
 
           <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-            <div className="mb-10 flex flex-wrap gap-8">
-
-              <button
-                onClick={() => window.location.reload()}
-                className="rounded-xl border border-green-500 bg-green-600/20 px-7 py-3 text-lg font-semibold text-green-300"
-              >
-                Learn
-              </button>
-
-              <button
-                onClick={() => router.push("/exam")}
-                className="rounded-xl border border-slate-700 bg-slate-800 px-7 py-3 text-lg font-semibold text-slate-300 hover:bg-slate-700 transition"
-              >
-                Exam
-              </button>
-
-              <button
-                onClick={() => router.push("/revision")}
-                className="rounded-xl border border-slate-700 bg-slate-800 px-7 py-3 text-lg font-semibold text-slate-300 hover:bg-slate-700 transition"
-              >
-                Revision
-              </button>
-
-              <button
-                onClick={() => router.push("/mcq")}
-                className="rounded-xl border border-slate-700 bg-slate-800 px-7 py-3 text-lg font-semibold text-slate-300 hover:bg-slate-700 transition"
-              >
-                MCQ
-              </button>
-
-              <button
-                onClick={() => router.push("/qa")}
-                className="rounded-xl border border-slate-700 bg-slate-800 px-7 py-3 text-lg font-semibold text-slate-300 hover:bg-slate-700 transition"
-              >
-                Q&A
-              </button>
-
-            </div>
+            <LargeModeSelector />
             
             <div className="grid grid-cols-2 gap-8">
 
