@@ -9,6 +9,11 @@ import Navbar from "@/components/Navbar";
 import { getExamData } from "@/services/exam";
 import { useEffect } from "react";
 import { getSemesters } from "@/services/semester";
+import ChatPanel from "@/components/ChatPanel";
+import UploadPanel from "@/components/UploadPanel";
+import WeakTopicsPanel from "@/components/WeakTopicsPanel";
+import StudyProgressPanel from "@/components/StudyProgressPanel";
+import LargeModeSelector from "@/components/LargeModeSelector";
 
 export default function ExamPage() {
 
@@ -110,59 +115,113 @@ Please make sure:
   return (
 
     <PageLayout>
-      <Navbar
-        semesters={semesters}
-        currentSemester={currentSemester}
-        onSelectSemester={setCurrentSemester}
-      />
 
-      <div className="mt-6">
+      <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-        <SubjectSelector
-          subjects={selectedSemester?.subjects || []}
-          subject={subject}
-          setSubject={setSubject}
+        <Navbar
+          semesters={semesters}
+          currentSemester={currentSemester}
+          onSelectSemester={setCurrentSemester}
         />
 
       </div>
 
-      <div className="mt-4">
+      <div className="grid grid-cols-12 gap-6 mb-6">
 
-        <UnitSelector
-          units={availableUnits}
-          unit={unit}
-          setUnit={setUnit}
-        />
+        <div className="col-span-3">
+
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+
+            <h2 className="mb-2 text-xl font-bold">
+              Exam Actions
+            </h2>
+
+            <p className="mb-5 text-sm text-slate-400">
+              Exam Mode
+            </p>
+
+            <div className="flex flex-col gap-3">
+
+              <button
+                onClick={startExamMode}
+                disabled={loading}
+                className="rounded-xl bg-blue-600 px-4 py-3 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? "Generating..." : "Exam Revision"}
+              </button>
+
+              <button className="rounded-xl bg-slate-800 px-4 py-3">
+                2 Marks
+              </button>
+
+              <button className="rounded-xl bg-slate-800 px-4 py-3">
+                5 Marks
+              </button>
+
+              <button className="rounded-xl bg-slate-800 px-4 py-3">
+                10 Marks
+              </button>
+
+              <button className="rounded-xl bg-slate-800 px-4 py-3">
+                Mock Test
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="col-span-9">
+
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+
+            <LargeModeSelector />
+
+            <div className="grid grid-cols-2 gap-8">
+
+              <SubjectSelector
+                subjects={selectedSemester?.subjects || []}
+                subject={subject}
+                setSubject={setSubject}
+              />
+
+              <UnitSelector
+                units={availableUnits}
+                unit={unit}
+                setUnit={setUnit}
+              />
+
+            </div>
+
+            <div className="mt-6">
+
+              <h2 className="mb-4 text-xl font-bold">
+                Exam Output
+              </h2>
+
+              <ChatPanel
+                subject={subject}
+                unit={unit}
+                lesson={
+                  loading
+                    ? "Generating..."
+                    : result ||
+                      "Select a subject and unit, then click 'Exam Revision' to generate exam notes."
+                }
+                selectedTopic="Exam Revision"
+              />
+
+            </div>
+
+
+          </div>
+
+        </div>
 
       </div>
 
-      <button
-        onClick={startExamMode}
-        disabled={loading}
-        className="mt-6 bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {loading ? "Loading..." : "Start Exam Mode"}
-      </button>
-
-      <div className="mt-6 border border-gray-800 rounded p-4">
-
-        <h2 className="font-bold mb-3">
-          Exam Response
-        </h2>
-
-        <pre className="whitespace-pre-wrap">
-
-          {result || `Exam mode is ready.
-
-Select a subject and unit, then click
-"Start Exam Mode".`}
-
-        </pre>
-
-      </div>
-
+      
     </PageLayout>
 
-  );
-
-}
+  );}
