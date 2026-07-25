@@ -2,7 +2,8 @@ import API from "./api";
 
 export async function getExamData(
   subject,
-  unit
+  unit,
+  examType = "revision"
 ) {
   const res = await API.get(
     "/exam",
@@ -10,6 +11,7 @@ export async function getExamData(
       params: {
         subject,
         unit,
+        exam_type: examType,
       },
     }
   );

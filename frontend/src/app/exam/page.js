@@ -10,9 +10,6 @@ import { getExamData } from "@/services/exam";
 import { useEffect } from "react";
 import { getSemesters } from "@/services/semester";
 import ChatPanel from "@/components/ChatPanel";
-import UploadPanel from "@/components/UploadPanel";
-import WeakTopicsPanel from "@/components/WeakTopicsPanel";
-import StudyProgressPanel from "@/components/StudyProgressPanel";
 import LargeModeSelector from "@/components/LargeModeSelector";
 
 export default function ExamPage() {
@@ -21,7 +18,6 @@ export default function ExamPage() {
   const [unit, setUnit] = useState("U1");
   const [semesters, setSemesters] = useState([]);
   const [currentSemester, setCurrentSemester] = useState("");
-
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -78,7 +74,7 @@ export default function ExamPage() {
 
   }, [currentSemester, semesters]);
 
-  async function startExamMode() {
+  async function generateExam(type) {
 
     try {
 
@@ -86,29 +82,31 @@ export default function ExamPage() {
 
       const data = await getExamData(
         subject,
-        unit
+        unit,
+        type
       );
 
       setResult(data.revision);
 
     } catch (err) {
 
-      console.error(err);
+        console.error(err);
 
-      setResult(
-`Unable to start Exam Mode.
+        setResult(
+      `Unable to generate exam content.
 
-Please make sure:
-• FastAPI backend is running
-• Study material has been uploaded
-• Subject and Unit are selected`
-      );
+      Please make sure:
+      • FastAPI backend is running
+      • Study material has been uploaded
+      • Subject and Unit are selected`
+        );
 
-    } finally {
+      } finally {
 
-      setLoading(false);
+    setLoading(false);
 
-    }
+  }
+    
 
   }
 
@@ -143,26 +141,42 @@ Please make sure:
             <div className="flex flex-col gap-3">
 
               <button
-                onClick={startExamMode}
+                onClick={() => generateExam("revision")}
                 disabled={loading}
                 className="rounded-xl bg-blue-600 px-4 py-3 text-white disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Generating..." : "Exam Revision"}
               </button>
 
-              <button className="rounded-xl bg-slate-800 px-4 py-3">
+              <button
+                disabled={loading}
+                onClick={() => generateExam("2marks")}
+                className="rounded-xl bg-slate-800 px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 2 Marks
               </button>
 
-              <button className="rounded-xl bg-slate-800 px-4 py-3">
+              <button
+                disabled={loading}
+                onClick={() => generateExam("5marks")}
+                className="rounded-xl bg-slate-800 px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 5 Marks
               </button>
 
-              <button className="rounded-xl bg-slate-800 px-4 py-3">
+              <button
+                disabled={loading}
+                onClick={() => generateExam("10marks")}
+                className="rounded-xl bg-slate-800 px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 10 Marks
               </button>
 
-              <button className="rounded-xl bg-slate-800 px-4 py-3">
+              <button
+                disabled={loading}
+                onClick={() => generateExam("mock")}
+                className="rounded-xl bg-slate-800 px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 Mock Test
               </button>
 

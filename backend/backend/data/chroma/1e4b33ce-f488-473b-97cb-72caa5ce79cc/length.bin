@@ -1,1 +1,11 @@
-invalid type: string "Data section containing global variables\nHeap containing memory dynamically allocated during run time\nMemory Layout of a C Program\nOPERATING SYSTEMS\nProcess State\nOPERATING SYSTEMS\nAs a process executes, it changes state\nNew: The process is being created\nRunning: Instructions are being executed\nWaiting: The process is waiting for some event to occur\n]aÿÿÿÿÿÿÿÿÿÿÿÿÿ
+ob queue â€“ set of all processes in the system
+Ready queue â€“ set of all processes residing in main memory, ready
+and waiting to execute
+Device queues â€“ set of processes waiting for an I/O device
+Processes migrate among the various queues
+Representation of Process Scheduling
+OPERATING SYSTEMS
+Schedulers
+OPERATING SYSTEMS
+Short-term scheduler (or CPU scheduler) â€“ selects which process
+ÿÿÿÿÿÿÿ

@@ -8,7 +8,8 @@ router = APIRouter()
 @router.get("/exam")
 def exam(
     subject: str,
-    unit: str
+    unit: str,
+    exam_type: str = "revision"
 ):
 
     context = get_unit_context(
@@ -25,7 +26,8 @@ def exam(
     revision = generate_exam_revision(
         subject,
         unit,
-        context
+        context,
+        exam_type
     )
 
     return {

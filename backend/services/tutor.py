@@ -119,45 +119,108 @@ End the lesson with:
         "lesson": lesson
     }
 
-def generate_exam_revision(subject, unit, context):
+def generate_exam_revision(subject, unit, context, exam_type):
 
-    prompt = f"""
-You are an experienced university professor helping a student prepare for exams.
+    if exam_type == "revision":
 
-Subject:
-{subject}
+        prompt = f"""
+    You are an experienced university professor helping a student prepare for exams.
 
-Unit:
-{unit}
+    Subject:
+    {subject}
 
-Study Material:
-{context}
+    Unit:
+    {unit}
 
-Instructions:
+    Study Material:
+    {context}
 
-Use ONLY the study material.
+    Generate concise exam revision notes.
 
-Generate concise exam revision notes.
+    Structure:
 
-Structure:
+    # Exam Revision
 
-# Exam Revision
+    ## Important Concepts
 
-## Important Concepts
+    ## Definitions
 
-## Definitions
+    ## Frequently Asked Questions
 
-## Frequently Asked Questions
+    ## Common Mistakes
 
-## Common Mistakes
+    ## Last Minute Revision Tips
 
-## Last Minute Revision Tips
+    Use ONLY the study material.
+    """
 
-Keep everything concise and exam-oriented.
+    elif exam_type == "2marks":
 
-Do not invent information.
-"""
+        prompt = f"""
+    Generate 10 important 2-mark questions.
 
+    For each question:
+    - Answer in 2-4 bullet points.
+    - Keep the answer under 60 words.
+    - Focus only on key definitions or facts.
+
+    Study Material:
+    {context}
+    """
+
+    elif exam_type == "5marks":
+
+        prompt = f"""
+    Generate 10 important 5-mark questions.
+
+    For each question:
+    - Write a complete exam answer of 250-300 words.
+    - Use Markdown headings.
+    - Explain the concept step by step.
+    - Include definitions.
+    - Explain the working/process.
+    - Include examples whenever possible.
+    - End with 2-3 key points for revision.
+
+    Study Material:
+    {context}
+    """
+
+    elif exam_type == "10marks":
+
+        prompt = f"""
+    Generate 10 important 10-mark questions.
+
+    For each question:
+    - Write a detailed exam answer of 500-800 words.
+    - Use proper Markdown headings.
+    - Start with a short introduction.
+    - Explain every important concept in detail.
+    - Include diagrams in text form if relevant.
+    - Include examples and applications.
+    - End with a concise conclusion.
+
+    Study Material:
+    {context}
+    """
+
+    elif exam_type == "mock":
+
+        prompt = f"""
+    Using ONLY the study material below,
+
+    Generate a university-style mock examination.
+
+    Include:
+    - 10 Two-Mark Questions
+    - 5 Five-Mark Questions
+    - 2 Ten-Mark Questions
+
+    Do NOT provide answers.
+
+    Study Material:
+    {context}
+    """
     revision = generate_response(prompt)
 
     return {
