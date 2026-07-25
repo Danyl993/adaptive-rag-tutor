@@ -56,7 +56,15 @@ export default function ModeSelector() {
 
           <button
             key={mode.href}
-            onClick={() => router.push(mode.href)}
+            onClick={() => {
+
+              if (pathname === mode.href) {
+                window.location.reload();
+              } else {
+                router.push(mode.href);
+              }
+
+            }}
             className={`flex items-center gap-2 rounded-xl px-5 py-3 font-medium transition-all ${
               active
                 ? "bg-blue-600 text-white shadow-lg"
