@@ -9,7 +9,7 @@ import Navbar from "@/components/Navbar";
 import { getMCQs } from "@/services/mcq";
 import { useEffect } from "react";
 import { getSemesters } from "@/services/semester";
-import ChatPanel from "@/components/ChatPanel";
+import MCQCard from "@/components/MCQCard";
 import LargeModeSelector from "@/components/LargeModeSelector";
 
 export default function MCQPage() {
@@ -18,7 +18,7 @@ export default function MCQPage() {
   const [unit, setUnit] = useState("U1");
   const [semesters, setSemesters] = useState([]);
   const [currentSemester, setCurrentSemester] = useState("");
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -91,12 +91,8 @@ export default function MCQPage() {
 
       console.error(err);
 
-      setResult(`Unable to generate MCQs.
-
-  Please make sure:
-  • FastAPI backend is running
-  • Study material has been uploaded
-  • Subject and Unit are selected`);
+      setResult([]);
+        console.error(err);
 
     } finally {
 
@@ -178,17 +174,19 @@ export default function MCQPage() {
                 MCQ Practice
               </h2>
 
-              <ChatPanel
-                subject={subject}
-                unit={unit}
-                lesson={
-                  loading
-                    ? "Generating..."
-                    : result ||
-                    "Select a subject and unit, then click 'Generate MCQs' to practice."
-                }
-                selectedTopic="MCQs"
-              />
+              <div className="rounded-xl border border-slate-800 bg-slate-950 p-5 min-h-[350px]">
+
+                {loading ? (
+
+                  <p>Generating MCQs...</p>
+
+                ) : (
+
+                  <MCQCard mcqs={result} />
+
+                )}
+
+              </div>
 
             </div>
 

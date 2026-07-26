@@ -8,7 +8,7 @@ def generate_mcq(context):
     prompt = f"""
 You are an expert university professor.
 
-Using ONLY the study material below, generate EXACTLY 5 MCQs.
+Using ONLY the study material below, generate EXACTLY 10 MCQs.
 
 Study Material:
 {context}
@@ -36,7 +36,7 @@ Rules:
 - No markdown.
 - No ```json.
 - No extra text.
-- Exactly 5 questions.
+- Exactly 10 questions.
 """
 
     response = generate_response(prompt)
