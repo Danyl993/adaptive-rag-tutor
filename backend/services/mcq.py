@@ -1,23 +1,44 @@
+import json
+
 from services.llm import generate_response
 
 
 def generate_mcq(context):
 
     prompt = f"""
-Generate 5 multiple choice questions.
+You are an expert university professor.
 
-Context:
+Using ONLY the study material below, generate EXACTLY 5 MCQs.
+
+Study Material:
 {context}
+
+Return ONLY valid JSON.
 
 Format:
 
-Question
-A)
-B)
-C)
-D)
+[
+  {{
+    "question": "...",
+    "options": {{
+      "A": "...",
+      "B": "...",
+      "C": "...",
+      "D": "..."
+    }},
+    "answer": "A",
+    "explanation": "..."
+  }}
+]
 
-Answer:
+Rules:
+- Return ONLY JSON.
+- No markdown.
+- No ```json.
+- No extra text.
+- Exactly 5 questions.
 """
 
-    return generate_response(prompt)
+    response = generate_response(prompt)
+
+    return json.loads(response)
