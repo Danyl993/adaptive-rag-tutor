@@ -7,16 +7,74 @@ import SubjectSelector from "@/components/SubjectSelector";
 import UnitSelector from "@/components/UnitSelector";
 import Navbar from "@/components/Navbar";
 import { getMCQs } from "@/services/mcq";
+import { useEffect } from "react";
+import { getSemesters } from "@/services/semester";
+import ChatPanel from "@/components/ChatPanel";
+import LargeModeSelector from "@/components/LargeModeSelector";
 
 export default function MCQPage() {
 
   const [subject, setSubject] = useState("OS");
   const [unit, setUnit] = useState("U1");
-
-  const [mcqs, setMcqs] = useState("");
+  const [semesters, setSemesters] = useState([]);
+  const [currentSemester, setCurrentSemester] = useState("");
+  const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function generateMCQs() {
+  useEffect(() => {
+
+    async function loadSemesters() {
+
+      try {
+
+        const data = await getSemesters();
+
+        setSemesters(data);
+
+        if (data.length > 0) {
+          setCurrentSemester(data[0].semester);
+        }
+
+      } catch (err) {
+
+        console.error(err);
+
+      }
+
+    }
+
+    loadSemesters();
+
+  }, []);
+
+  const selectedSemester = semesters.find(
+    (item) => item.semester === currentSemester
+  );
+
+  const selectedSubject = selectedSemester?.subjects?.find(
+    (item) => item.name === subject
+  );
+
+  const availableUnits = selectedSubject
+    ? Array.from(
+        { length: selectedSubject.units },
+        (_, index) => `U${index + 1}`
+      )
+    : [];
+
+  useEffect(() => {
+
+    if (
+      selectedSemester &&
+      selectedSemester.subjects.length > 0
+    ) {
+      setSubject(selectedSemester.subjects[0].name);
+      setUnit("U1");
+    }
+
+  }, [currentSemester, semesters]);
+
+  async function generateMCQ() {
 
     try {
 
@@ -27,19 +85,18 @@ export default function MCQPage() {
         unit
       );
 
-      setMcqs(data.mcqs);
+      setResult(data.mcqs);
 
     } catch (err) {
 
       console.error(err);
 
-      setMcqs(
-`Unable to generate MCQs.
+      setResult(`Unable to generate MCQs.
 
-Please make sure:
-• FastAPI backend is running
-• Notes have been uploaded for this subject/unit`
-      );
+  Please make sure:
+  • FastAPI backend is running
+  • Study material has been uploaded
+  • Subject and Unit are selected`);
 
     } finally {
 
@@ -52,53 +109,97 @@ Please make sure:
   return (
 
     <PageLayout>
-      <Navbar />
 
-      <div className="mt-6">
+      <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
 
-        <SubjectSelector
-          subject={subject}
-          setSubject={setSubject}
+        <Navbar
+          semesters={semesters}
+          currentSemester={currentSemester}
+          onSelectSemester={setCurrentSemester}
         />
 
       </div>
 
-      <div className="mt-4">
+      <div className="grid grid-cols-12 gap-6 mb-6">
 
-        <UnitSelector
-          unit={unit}
-          setUnit={setUnit}
-        />
+        <div className="col-span-3">
+
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+
+            <h2 className="mb-2 text-xl font-bold">
+              MCQ Actions
+            </h2>
+
+            <p className="mb-5 text-sm text-slate-400">
+              MCQ Practice
+            </p>
+
+            <div className="flex flex-col gap-3">
+
+              <button
+                onClick={generateMCQ}
+                disabled={loading}
+                className="rounded-xl bg-blue-600 px-4 py-3 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? "Generating..." : "Generate MCQs"}
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="col-span-9">
+
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+
+            <LargeModeSelector />
+
+            <div className="grid grid-cols-2 gap-8">
+
+              <SubjectSelector
+                subjects={selectedSemester?.subjects || []}
+                subject={subject}
+                setSubject={setSubject}
+              />
+
+              <UnitSelector
+                units={availableUnits}
+                unit={unit}
+                setUnit={setUnit}
+              />
+
+            </div>
+
+            <div className="mt-6">
+
+              <h2 className="mb-4 text-xl font-bold">
+                MCQ Practice
+              </h2>
+
+              <ChatPanel
+                subject={subject}
+                unit={unit}
+                lesson={
+                  loading
+                    ? "Generating..."
+                    : result ||
+                    "Select a subject and unit, then click 'Generate MCQs' to practice."
+                }
+                selectedTopic="MCQs"
+              />
+
+            </div>
+
+
+          </div>
+
+        </div>
 
       </div>
 
-      <button
-        onClick={generateMCQs}
-        disabled={loading}
-        className="mt-6 bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {loading ? "Generating..." : "Generate MCQs"}
-      </button>
-
-      <div className="mt-6 border border-gray-800 rounded p-4">
-
-        <h2 className="font-bold mb-3">
-          Generated Questions
-        </h2>
-
-        <pre className="whitespace-pre-wrap">
-
-          {mcqs || `No MCQs generated yet.
-
-Select a subject and unit, then click
-"Generate MCQs".`}
-
-        </pre>
-
-      </div>
-
+      
     </PageLayout>
 
-  );
-
-}
+  );}
