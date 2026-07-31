@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   MessageSquare,
   NotebookPen,
@@ -15,26 +16,31 @@ export default function NavigationSidebar() {
       name: "Recent Chats",
       description: "Continue previous conversations",
       icon: MessageSquare,
+      link: "/history",
     },
     {
       name: "Saved Notes",
       description: "Quick revision material",
       icon: NotebookPen,
+      link: "/revision",
     },
     {
       name: "Study Progress",
       description: "Track your learning",
       icon: BarChart3,
+      link: "/progress",
     },
     {
       name: "Weak Topics",
       description: "Focus on difficult concepts",
       icon: Target,
+      link: "/weak-topics",
     },
     {
       name: "Uploaded Files",
       description: "Manage study resources",
       icon: FolderOpen,
+      link: "/files",
     },
   ];
   return (
@@ -51,13 +57,14 @@ export default function NavigationSidebar() {
           const Icon = item.icon;
 
           return (
-            <button
+            <Link
               key={item.name}
+              href={item.link}
               className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
             >
               <Icon size={20} />
-              <div className="text-left">
 
+              <div className="text-left">
                 <p className="font-medium">
                   {item.name}
                 </p>
@@ -65,9 +72,8 @@ export default function NavigationSidebar() {
                 <p className="text-xs text-slate-400">
                   {item.description}
                 </p>
-
               </div>
-            </button>
+            </Link>
           );
 
         })}
