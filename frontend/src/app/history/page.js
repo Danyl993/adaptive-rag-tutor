@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 
 import PageLayout from "@/components/PageLayout";
-
+import Navbar from "@/components/Navbar";
+import { getSemesters } from "@/services/semester";
 import { getHistory } from "@/services/history";
 
 export default function HistoryPage() {
@@ -31,10 +32,47 @@ export default function HistoryPage() {
 
   }, []);
 
+    const [semesters, setSemesters] = useState([]);
+    const [currentSemester, setCurrentSemester] = useState("");
+
+    useEffect(() => {
+    async function loadSemesters() {
+
+        try {
+
+            const data = await getSemesters();
+
+            setSemesters(data);
+
+            if (data.length > 0) {
+            setCurrentSemester(data[0].semester);
+            }
+
+        } catch (err) {
+
+            console.error(err);
+
+        }
+
+        }
+
+    loadSemesters();
+    }, []);
+
   return (
 
     <PageLayout>
-        
+
+        <div className="mb-6 rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+
+            <Navbar
+                semesters={semesters}
+                currentSemester={currentSemester}
+                onSelectSemester={setCurrentSemester}
+            />
+
+        </div>
+
       <h1 className="text-3xl font-bold mb-6">
         Recent Chats
       </h1>
