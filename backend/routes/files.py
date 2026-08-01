@@ -19,4 +19,15 @@ def files(subject: str, unit: str):
     if not os.path.exists(folder):
         return []
 
-    return os.listdir(folder)
+    files = []
+
+    for filename in os.listdir(folder):
+        path = os.path.join(folder, filename)
+
+        files.append({
+            "name": filename,
+            "size": os.path.getsize(path),
+            "type": os.path.splitext(filename)[1],
+        })
+
+    return files

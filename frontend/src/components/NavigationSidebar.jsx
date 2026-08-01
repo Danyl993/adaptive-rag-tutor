@@ -36,7 +36,7 @@ export default function NavigationSidebar() {
       icon: Target,
       link: "/weak-topics",
     },
-    {
+   {
       name: "Uploaded Files",
       description: "Manage study resources",
       icon: FolderOpen,
@@ -54,26 +54,34 @@ export default function NavigationSidebar() {
 
         {items.map((item) => {
 
-          const Icon = item.icon;
+          const content = (
+            <>
+            <div className="flex items-start gap-3">
+              <item.icon className="h-5 w-5" />
 
-          return (
+              <div>
+                <p className="font-medium">{item.name}</p>
+                <p className="text-sm text-slate-400">{item.description}</p>
+              </div>
+            </div>
+            </>
+          );
+
+          return item.link ? (
             <Link
               key={item.name}
               href={item.link}
-              className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-slate-300 transition-all duration-200 hover:bg-slate-800 hover:text-white"
+              className="..."
             >
-              <Icon size={20} />
-
-              <div className="text-left">
-                <p className="font-medium">
-                  {item.name}
-                </p>
-
-                <p className="text-xs text-slate-400">
-                  {item.description}
-                </p>
-              </div>
+              {content}
             </Link>
+          ) : (
+            <button
+              key={item.name}
+              className="..."
+            >
+              {content}
+            </button>
           );
 
         })}
